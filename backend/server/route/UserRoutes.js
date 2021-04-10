@@ -4,10 +4,8 @@ const userService = require("../service/userServices");
 
 // All users
 router.get('/', async function (req, res) {
-
     const users = await userService.getUsers();
     res.json(users);
-
 });
 
 // Only one user
