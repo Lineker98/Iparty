@@ -38,11 +38,27 @@ router.post('/authenticate', async (req, res) => {
 
 
 // Criação do usuario
-// router.post('/user/:id', async function (req, res) {
-//     const user = req.body;
-//     const newUser = await userService.saveUser(user);
-//     res.json(newUser);
-// });
+router.post('/register', async (req, res) => {
+
+    const { email } = req.body;
+    console.log(email);
+    const user = req.body;
+
+    try{
+
+        if(await userService.getUserByEmail( email ) !== null){
+            return res.status(400).send({ error: 'Email já existente!'});
+        }
+
+        const newUser = await userService.creatUser(user);
+        newUser.senha = undefined;
+        return res.send({ newUser });
+
+    } catch (err) {
+       return res.status(400).send({ error: 'Falha no registro!'});
+    }
+    
+ });
 
 // router.put('/:id', async function (req, res) {
 //     const user = req.body;

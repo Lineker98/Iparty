@@ -12,9 +12,10 @@ exports.getUserByEmail = function(email){
     return database.oneOrNone('select * from usuario where email = $1', [email]);
 }
 
-// exports.saveUser = function (user) {
-//     return database.one('insert into usuario (nome, cpf, email, senha, data_nascimento) values ($1, $2, $3, $4, $5) returning *', [user.nome, user.cpf, user.email, user.senha, user.data_nascimento])
-// };
+exports.creatUser = function (user) {
+    return database.one('insert into usuario (nome, cpf, email, senha, data_nascimento) values ($1, $2, $3, $4, $5) returning *',
+    [user.nome, user.cpf, user.email, user.senha, user.data_nascimento])
+};
 
 //  exports.updateUser = function (id, user){
 //      return database.none('update usuario set ...')

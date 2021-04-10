@@ -12,9 +12,9 @@ exports.getUserByEmail = function(email){
     return userData.getUserByEmail(email);
 }
 
-// exports.saveUser = function (user) {
-//     return userData.saveUser(user);
-// };
+ exports.creatUser = function (user) {
+    return userData.creatUser(user);
+};
 
 // exports.deleteUser = function (id) {
 //     return userData.delete(id);
