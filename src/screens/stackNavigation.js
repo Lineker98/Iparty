@@ -34,7 +34,7 @@ function App() {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="signUp"
+        <Stack.Navigator initialRouteName="iparty"
           screenOptions={{
             cardStyle: { backgroundColor: darkBlue }
           }}
