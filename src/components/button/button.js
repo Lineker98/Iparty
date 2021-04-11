@@ -27,6 +27,8 @@ export default function button({
 const styles = StyleSheet.create({
   button: {
     flex: 1,
+    width:'100%',
+    height:'100%',
     justifyContent: 'center',
     alignItems: 'center'
   }

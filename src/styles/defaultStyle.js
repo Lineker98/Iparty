@@ -52,7 +52,6 @@ export default StyleSheet.create({
 
   buttonText: {
     color: 'white',
-    fontSize: 20,
   },
 
   shadow: {

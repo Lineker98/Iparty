@@ -1,5 +1,12 @@
 import React, { useContext, useState } from 'react'
-import { View, Text, StatusBar, ImageBackground, StyleSheet, TextInput } from 'react-native'
+import {
+  View,
+  Text,
+  StatusBar,
+  ImageBackground,
+  StyleSheet,
+  TextInput
+} from 'react-native'
 
 import background from "../assets/background2.png"
 import defaultStyle from '../styles/defaultStyle'
@@ -12,7 +19,7 @@ import userData from '../components/dados/userData'
 import { AuthContext } from '../components/dados/context'
 
 export default function login({ navigation }) {
-  
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { signIn } = useContext(AuthContext);
@@ -26,7 +33,7 @@ export default function login({ navigation }) {
       await userData.set(currentUser);
       signIn()
     }
-    else{
+    else {
       alert(currentUser.error)
     }
   }

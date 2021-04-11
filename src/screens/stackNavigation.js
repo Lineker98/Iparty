@@ -2,7 +2,13 @@ import React, { useState, useMemo } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { IpartyScreen, LoginScreen, SignUpScreen } from "./index";
+import {
+  IpartyScreen,
+  LoginScreen,
+  SignUpScreen,
+  SignUp2Screen
+} from "./index";
+
 import TabNavigation from "./tabNavigation";
 
 import { AuthContext } from "../components/dados/context";
@@ -28,7 +34,7 @@ function App() {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="login"
+        <Stack.Navigator initialRouteName="signUp"
           screenOptions={{
             cardStyle: { backgroundColor: darkBlue }
           }}
@@ -52,6 +58,13 @@ function App() {
               <Stack.Screen
                 name="signUp"
                 component={SignUpScreen}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="signUp2"
+                component={SignUp2Screen}
                 options={{
                   headerShown: false,
                 }}
