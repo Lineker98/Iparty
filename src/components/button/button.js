@@ -6,7 +6,7 @@ import defaultStyle from '../../styles/defaultStyle'
 export default function button({
   onPress = () => { },
   text = "CLIQUE AQUI",
-  styleText = { color: 'white' },
+  styleText = defaultStyle.buttonText,
   styleButton = defaultStyle.button
 }) {
 

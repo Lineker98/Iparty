@@ -8,7 +8,7 @@ import { pink } from '../styles/color';
 
 export default function iparty({navigation}) {
   return (
-    <View style={styles.container}>
+    <View style={defaultStyle.background}>
       <StatusBar backgroundColor="black" />
       <Image
         source={logo}
@@ -21,14 +21,13 @@ export default function iparty({navigation}) {
         <Button
           text="LOGIN"
           styleButton={[styles.button, styles.buttonLogin]}
-          styleText={[styles.buttonText,{color:pink}]}
+          styleText={[defaultStyle.buttonText,{color:pink}]}
           onPress={()=>navigation.navigate('login')}
         />
 
         <Button
           text="REGISTRE-SE"
           styleButton={styles.button}
-          styleText={styles.buttonText}
           onPress={()=>navigation.navigate('signUp')}
         />
 
@@ -39,23 +38,11 @@ export default function iparty({navigation}) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: "100%",
-    alignSelf: "center",
-    backgroundColor: "black",
-  },
-
   logo: {
     flex: 1,
     justifyContent: "center",
     alignSelf: "center",
     width: '120%'
-  },
-
-  buttonText: {
-    fontWeight: 'bold',
-    color: 'white'
   },
 
   ButtonView: {
@@ -79,9 +66,5 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderColor: pink,
   },
-
-  text: {
-    color: 'white',
-  }
 })
 

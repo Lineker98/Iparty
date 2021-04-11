@@ -1,30 +1,31 @@
 import { StyleSheet } from "react-native";
-import { pink } from "./color";
+import { pink, darkBlue } from "./color";
 
 export default StyleSheet.create({
   container: {
     flex: 1,
     width: "95%",
     alignSelf: "center",
-    backgroundColor: "white",
+    backgroundColor: darkBlue,
   },
 
-  scrollView: {
+  background: {
     flexGrow: 1,
     width: "100%",
-    backgroundColor: "white",
+    backgroundColor: "black",
   },
 
   title: {
-    fontSize: 35,
+    fontSize: 45,
     marginVertical: 20,
+    color: 'white'
   },
 
   input: {
+    backgroundColor:darkBlue,
+    color:'white',
     padding: 10,
-    height: 50,
-    borderColor: "grey",
-    borderWidth: 1,
+    height: 60,
     borderRadius: 10,
     marginBottom: 20,
   },
@@ -46,7 +47,12 @@ export default StyleSheet.create({
     alignItems: "center",
     borderRadius: 5,
     height: 60,
-    marginBottom:15,
+    marginBottom: 15,
+  },
+
+  buttonText: {
+    color: 'white',
+    fontSize: 20,
   },
 
   shadow: {
@@ -61,13 +67,13 @@ export default StyleSheet.create({
     },
   },
 
-  tabIcon:{
-    backgroundColor:pink, 
-    width:'100%', 
-    height:'90%',
-    textAlign:'center',
-    textAlignVertical:'center',
-    borderRadius:20,
-    opacity:0.8,
+  tabIcon: {
+    backgroundColor: pink,
+    width: '100%',
+    height: '90%',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    borderRadius: 20,
+    opacity: 0.8,
   }
 });

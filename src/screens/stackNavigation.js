@@ -5,7 +5,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { IpartyScreen, LoginScreen, SignUpScreen } from "./index";
 import TabNavigation from "./tabNavigation";
 
-import { AuthContext } from "../components/context";
+import { AuthContext } from "../components/dados/context";
+import { darkBlue } from "../styles/color";
 
 const Stack = createStackNavigator();
 
@@ -27,9 +28,9 @@ function App() {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="iparty"
+        <Stack.Navigator initialRouteName="login"
           screenOptions={{
-            cardStyle: { backgroundColor: 'white' }
+            cardStyle: { backgroundColor: darkBlue }
           }}
         >
           {!isUserCurrent ? (

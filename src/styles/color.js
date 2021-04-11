@@ -1,2 +1,2 @@
-export const pink = '#e0174a'
-export const lightGrey = '#999999'
+export const pink = '#FF003E'
+export const darkBlue = '#21213F'
