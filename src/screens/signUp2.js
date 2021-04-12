@@ -9,49 +9,74 @@ import {
   ScrollView
 } from 'react-native'
 
+
 import background from "../assets/background2.png"
 import defaultStyle from '../styles/defaultStyle'
 
 import BackIcon from '../components/button/backIcon'
 import LoadingButton from '../components/button/loadingButton'
+import Calender from '../components/button/calender';
 
 import SignUpApi from '../api/signUp'
 import userData from '../components/dados/userData'
 import { AuthContext } from '../components/dados/context'
+import { pink } from '../styles/color'
 
-export default function signUp2({ route }) {
+
+const now = new Date(Date.now())
+
+export default function signUp2({ route, navigation }) {
   const [cpf, setCpf] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [telefone, setTelefone] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+  const [date, setDate] = useState(now)
+
   const { signIn } = useContext(AuthContext);
+
+  const onChangeDate = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+
+    var newDate = new Date(currentDate)
+    setDate(newDate)
+  };
 
   async function callSignUpServe() {
 
     let data = {
       nome: name,
-      cpf: cpf,
       email: email,
       senha: password,
-      data_nascimento: "2020-08-27"
+      data_nascimento: date,
+      telefone: telefone
     }
 
-    if (isPasswordRight() != 'red') {
-      const currentUser = await SignUpApi
-        .callSignUpServe(data);
+    if(cpf.length == 11){
+      data.cpf = cpf
+    }
+    else{
+      data.cnpj = cpf
+    }
 
-      if (!currentUser.error) {
-        await userData.set(currentUser);
-        signIn()
-      }
-      else {
-        alert(currentUser.error)
-      }
-    }
-    else {
-      alert("Erro no preenchimento da senha")
-    }
+    console.log(data)
+
+    // if (isPasswordRight() != 'red') {
+    //   const currentUser = await SignUpApi
+    //     .callSignUpServe(data);
+
+    //   if (!currentUser.error) {
+    //     await userData.set(currentUser);
+    //     signIn()
+    //   }
+    //   else {
+    //     alert(currentUser.error)
+    //   }
+    // }
+    // else {
+    //   alert("Erro no preenchimento da senha")
+    // }
   }
 
   const isPasswordRight = () => (
@@ -74,8 +99,6 @@ export default function signUp2({ route }) {
 
           <Text style={defaultStyle.title}>Registrar-se</Text>
 
-          {/* {
-            route.params && route.params.name != 'Produtor' ? null : */}
           <TextInput
             style={defaultStyle.input}
             placeholderTextColor={defaultStyle.input.color}
@@ -83,7 +106,6 @@ export default function signUp2({ route }) {
             value={cpf}
             onChangeText={setCpf}
           />
-          {/* } */}
 
           <TextInput
             style={defaultStyle.input}
@@ -92,6 +114,25 @@ export default function signUp2({ route }) {
             value={name}
             onChangeText={setName}
           />
+
+          {
+            route.params && route.params.name != 'Produtor' ?
+              <Calender
+                onChange={onChangeDate}
+                text='Data de aniversário'
+                styleText={styles.dateText}
+                styleDate={styles.dateText}
+                styleContainer={styles.date}
+              />
+              :
+              <TextInput
+                style={defaultStyle.input}
+                placeholderTextColor={defaultStyle.input.color}
+                placeholder="Telefone"
+                value={telefone}
+                onChangeText={setTelefone}
+              />
+          }
 
           <TextInput
             style={defaultStyle.input}
@@ -127,7 +168,6 @@ export default function signUp2({ route }) {
             )
             }
           />
-
         </View>
       </ScrollView>
     </ImageBackground>
@@ -143,5 +183,20 @@ const styles = StyleSheet.create({
   container: {
     ...defaultStyle.container,
     backgroundColor: 'transparent',
-  }
+  },
+
+  dateText: {
+    color: 'white',
+    fontWeight: 'bold'
+  },
+
+  date: {
+    ...defaultStyle.input,
+    backgroundColor:pink,
+    opacity:0.85,
+    justifyContent: 'center',
+    width:'50%',
+    alignSelf:'center',
+    alignItems: 'center',
+  },
 })
