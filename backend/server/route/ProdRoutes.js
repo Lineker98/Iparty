@@ -32,7 +32,8 @@ router.post('/register', async (req, res) => {
                 return res.send({ newProdutor });
 
             } catch (error) {
-                return res.status(400).send({ error: 'Falha na verificação dos dados!'});
+                // preciso dar um delete
+                return res.status(400).send({ error: 'Falha na verificação dos dados! Tente Novamente.'});
             }
 
         } catch (error){
@@ -57,7 +58,8 @@ router.post('/register', async (req, res) => {
                 return res.send({ newProdutor });
 
             } catch (error) {
-                return res.status(400).send({ error: 'Falha na verificação dos dados!'});
+                // Preciso dar um delete
+                return res.status(400).send({ error: 'Falha na verificação dos dados! Tente Novamente'});
             }
 
         }catch(error){
