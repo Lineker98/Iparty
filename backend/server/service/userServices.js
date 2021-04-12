@@ -1,10 +1,10 @@
 const userData = require("../data/UserInteracao");
 
-exports.getUsers = function () {
+exports.getUsers = function() {
     return userData.getUsers();
 };
 
-exports.getUser = function (id) {
+exports.getUser = function(id) {
     return userData.getUser(id);
 };
 
@@ -12,9 +12,13 @@ exports.getUserByEmail = function(email){
     return userData.getUserByEmail(email);
 }
 
- exports.creatUser = function (user) {
+exports.creatUser = function(user) {
     return userData.creatUser(user);
 };
+
+exports.getPartiesByUser = function(id_usuario){
+    return userData.getPartiesByUser(id_usuario);
+}
 
 // exports.deleteUser = function (id) {
 //     return userData.delete(id);

@@ -1,8 +1,5 @@
 const database = require('../infra/database');
 
-exports.getUsers = function (){
-    return database.query('select * from usuario');
-};
 
 exports.getUser = function (id){
     return database.oneOrNone('select * from usuario where id_usuario = $1', [id]);
@@ -17,6 +14,10 @@ exports.creatUser = function (user) {
     [user.nome, user.cpf, user.email, user.senha, user.data_nascimento])
 };
 
+exports.getPartiesByUser = function(id){
+    return database.manyOrNone("select * from festa where id_festa in" +
+    "(select id_festa from frequenta where id_usuario = $1)", [id]);
+};
 //  exports.updateUser = function (id, user){
 //      return database.none('update usuario set ...')
 // }
