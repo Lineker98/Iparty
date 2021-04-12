@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -11,6 +11,7 @@ import {
 
 import TabNavigation from "./tabNavigation";
 
+import userData from '../components/dados/userData';
 import { AuthContext } from "../components/dados/context";
 import { darkBlue } from "../styles/color";
 
@@ -18,6 +19,16 @@ const Stack = createStackNavigator();
 
 function App() {
   const [isUserCurrent, setIsUserCurrent] = useState(false);
+
+  useEffect(() => {
+    
+    userData.get().then((snapshot) => {
+      if (snapshot && snapshot.id) {
+        setIsUserCurrent(true)
+      }
+
+    })
+  }, [])
 
   const authContext = useMemo(() => ({
     signIn: () => {

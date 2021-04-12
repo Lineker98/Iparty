@@ -34,7 +34,7 @@ export default function signUp2({ route, navigation }) {
   const [password2, setPassword2] = useState("");
   const [date, setDate] = useState(now)
 
-  const { signIn } = useContext(AuthContext);
+  const { signUp } = useContext(AuthContext);
 
   const onChangeDate = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -62,21 +62,21 @@ export default function signUp2({ route, navigation }) {
 
     console.log(data)
 
-    // if (isPasswordRight() != 'red') {
-    //   const currentUser = await SignUpApi
-    //     .callSignUpServe(data);
+    if (isPasswordRight() != 'red') {
+      const currentUser = await SignUpApi
+        .callSignUpServe(data);
 
-    //   if (!currentUser.error) {
-    //     await userData.set(currentUser);
-    //     signIn()
-    //   }
-    //   else {
-    //     alert(currentUser.error)
-    //   }
-    // }
-    // else {
-    //   alert("Erro no preenchimento da senha")
-    // }
+      if (!currentUser.error) {
+        await userData.set(currentUser);
+        signUp()
+      }
+      else {
+        alert(currentUser.error)
+      }
+    }
+    else {
+      alert("Erro no preenchimento da senha")
+    }
   }
 
   const isPasswordRight = () => (
