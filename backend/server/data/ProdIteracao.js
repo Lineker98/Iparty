@@ -28,7 +28,7 @@ exports.getAllDataFisica = function(id_produtor){
 };
 
 exports.getAllDataJuridica = function(id_produtor){
-    return database.oneOrNone("select prod.id_produtor, prod.nome, prod.email, prod.senha, prod.telefone, prod.avaliacao, pf.cpf" +
-                                " from produtor prod, pessoajuridica pj" +
+    return database.oneOrNone("select prod.id_produtor, prod.nome, prod.email, prod.senha, prod.telefone, prod.avaliacao, pj.cnpj" +
+                                " from produtor prod, PessoaJuridica pj" +
                                 " where prod.id_produtor = $1 AND  pj.id_produtor = $2", [id_produtor, id_produtor]);
 };

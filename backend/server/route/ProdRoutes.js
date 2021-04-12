@@ -51,8 +51,8 @@ router.post('/register', async (req, res) => {
 
             try {
 
-                await prodServices.inserePessoaJuridica(identificador.id_produtor, produtor.cpf);
-                const newProdutor = await prodServices.getAllData(identificador.id_produtor);
+                await prodServices.inserePessoaJuridica(identificador.id_produtor, produtor.cnpj);
+                const newProdutor = await prodServices.getAllDataJuridica(identificador.id_produtor);
                 console.log('Cadastrado com sucesso!')
                 return res.send({ newProdutor });
 
