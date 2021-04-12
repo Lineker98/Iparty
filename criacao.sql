@@ -1,5 +1,5 @@
 CREATE TABLE Usuario (
-  id_usuario BIGSERIAL NOT NULL PRIMARY KEY,
+  id_usuario BIGSERIAL PRIMARY KEY,
   nome varchar NOT NULL,
   cpf char(11) NOT NULL,
   email varchar NOT NULL,
