@@ -23,6 +23,7 @@ router.post('/register', async (req, res) => {
 
         const newUser = await userService.creatUser(user);
         newUser.senha = undefined;
+        console.log('Usuário criado com sucesso!');
         return res.send({ newUser });
 
     } catch (err) {
