@@ -20,6 +20,10 @@ exports.getPartiesByUser = function(id_usuario){
     return userData.getPartiesByUser(id_usuario);
 }
 
+exports.getUserByName = function(name){
+    return userData.getUserByName(name);
+};
+
 // exports.deleteUser = function (id) {
 //     return userData.delete(id);
 // };

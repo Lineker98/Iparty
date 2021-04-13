@@ -18,6 +18,10 @@ exports.getPartiesByUser = function(id){
     return database.manyOrNone("select * from festa where id_festa in" +
     "(select id_festa from frequenta where id_usuario = $1)", [id]);
 };
+
+exports.getUserByName = function(name){
+    return database.manyOrNone("select * from usuario where nome like $1", ['%' + name + '%']);
+};
 //  exports.updateUser = function (id, user){
 //      return database.none('update usuario set ...')
 // }

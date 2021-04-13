@@ -34,6 +34,11 @@ router.post('/register', async (req, res) => {
 router.get('/listparties/:id', async function (req, res){
     const parties = await userService.getPartiesByUser(req.params.id);
     res.json(parties);
+});
+
+router.get('/listusers/:name', async function (req, res) {
+    const users = await userService.getUserByName(req.params.name);
+    res.send({users});
 })
 
 // Only one user
