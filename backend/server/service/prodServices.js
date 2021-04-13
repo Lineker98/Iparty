@@ -4,11 +4,11 @@ exports.getProdutor = function (identificador) {
     return prodData.getProdutor(identificador);
 };
 
-exports.getProdutorByEmail = function( email ){
-    return prodData.getProdutorByEmail( email );
+exports.getProdutorByEmail = function(email){
+    return prodData.getProdutorByEmail(email);
 };
 
-exports.creatProdutor = function( produtor ){
+exports.creatProdutor = function(produtor){
     return prodData.creatProdutor(produtor);
 };
 
@@ -26,5 +26,9 @@ exports.getAllDataFisica = function(identificador){
 
 exports.getAllDataJuridica = function(identificador){
     return prodData.getAllDataJuridica(identificador);
+};
+
+exports.deleteProductor = function(id){
+    return prodData.deleteProductor(id);
 };
 

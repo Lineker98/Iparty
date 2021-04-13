@@ -32,3 +32,7 @@ exports.getAllDataJuridica = function(id_produtor){
                                 " from produtor prod, PessoaJuridica pj" +
                                 " where prod.id_produtor = $1 AND  pj.id_produtor = $2", [id_produtor, id_produtor]);
 };
+
+exports.deleteProductor = function(id_produtor){
+    return database.result('delete from produtor where id_produtor = $1', [id_produtor]);
+};

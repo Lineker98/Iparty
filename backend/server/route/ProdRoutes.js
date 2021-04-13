@@ -29,11 +29,13 @@ router.post('/register', async (req, res) => {
 
                 const newProdutor = await prodServices.getAllDataFisica(identificador.id_produtor);
                 console.log('Cadastrado com sucesso!')
+
+                newProdutor.senha = undefined;
                 return res.send({ newProdutor });
 
             } catch (error) {
-                // preciso dar um delete
-                return res.status(400).send({ error: 'Falha na verificação dos dados! Tente Novamente.'});
+                await prodServices.deleteProductor(identificador.id_produtor)
+                return res.status(400).send({ error: 'Falha na verificação dos dados, tente novamente.'});
             }
 
         } catch (error){
@@ -54,12 +56,14 @@ router.post('/register', async (req, res) => {
 
                 await prodServices.inserePessoaJuridica(identificador.id_produtor, produtor.cnpj);
                 const newProdutor = await prodServices.getAllDataJuridica(identificador.id_produtor);
-                console.log('Cadastrado com sucesso!')
+                console.log('Cadastrado com sucesso!');
+
+                newProdutor.senha = undefined;
                 return res.send({ newProdutor });
 
             } catch (error) {
-                // Preciso dar um delete
-                return res.status(400).send({ error: 'Falha na verificação dos dados! Tente Novamente'});
+                await prodServices.deleteProductor(identificador.id_produtor)
+                return res.status(400).send({ error: 'Falha na verificação dos dados, tente novamente!'});
             }
 
         }catch(error){
