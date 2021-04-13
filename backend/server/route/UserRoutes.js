@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userService = require("../service/userServices");
 
+
 // All users
 // router.get('/', async function (req, res) {
 //     const users = await userService.getUsers();
@@ -25,7 +26,7 @@ router.post('/authenticate', async (req, res) => {
     }
 
     user.senha = undefined;
-
+    user['tipo'] = 'usuario';
     res.send({ user });
 });
 
