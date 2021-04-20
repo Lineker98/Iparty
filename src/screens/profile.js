@@ -150,8 +150,10 @@ export default function profile({ route, navigation }) {
 
       <FlatList
         style={{
-          flex: 1,
-          marginVertical: 50,
+          flex: 2,
+          marginTop: 20,
+          height:'100%',
+          
         }}
         data={parties}
         keyExtractor={(item) => item.id_festa}

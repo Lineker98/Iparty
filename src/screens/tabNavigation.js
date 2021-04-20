@@ -33,7 +33,7 @@ export default function tabNavigation() {
 
   return (
     <Tab.Navigator
-      initialRouteName="profile"
+      initialRouteName="search"
       sceneContainerStyle={{ backgroundColor: background }}
       tabBarOptions={{
         style: { backgroundColor: '#121222' },
@@ -81,7 +81,6 @@ export default function tabNavigation() {
             ),
           }}
         />
-
       )}
       <Tab.Screen
         name="profile"
