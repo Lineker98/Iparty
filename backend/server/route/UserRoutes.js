@@ -41,12 +41,11 @@ router.get('/listusers/:name', async function (req, res) {
     const users = await userService.getUserByName(req.params.name);
     res.send({users});
 })
-
-// Only one user
-// router.get('/:id', async function (req, res) {
-//     const user = await userService.getUser(req.params.id);
-//     res.json(user);
-// });
+ 
+router.get('/listuser/:id', async function (req, res) {
+     const user = await userService.getUser(req.params.id);
+     res.json(user);
+});
 
 // router.put('/:id', async function (req, res) {
 //     const user = req.body;
