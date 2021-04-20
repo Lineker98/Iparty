@@ -1,18 +1,24 @@
 import { StyleSheet } from "react-native";
-import { pink, darkBlue } from "./color";
+import { pink, darkBlue, background } from "./color";
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    width: "95%",
+    width: "90%",
     alignSelf: "center",
-    backgroundColor: darkBlue,
+    backgroundColor: background,
   },
 
   background: {
     flexGrow: 1,
     width: "100%",
     backgroundColor: "black",
+  },
+
+  scrollView: {
+    flexGrow: 1,
+    width: "100%",
+    backgroundColor: background,
   },
 
   title: {

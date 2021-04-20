@@ -11,7 +11,7 @@ import {
   MoreInfoScreen,
 } from "./index";
 
-import { background, pink } from "../styles/color";
+import { background, darkBlue, pink } from "../styles/color";
 import defaultStyle from "../styles/defaultStyle";
 
 import userData from '../components/dados/userData';

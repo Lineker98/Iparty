@@ -1,27 +1,46 @@
 import React, { useCallback, useContext, useState } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
+import { Avatar } from "react-native-elements";
 
-import { View, Text, StatusBar } from 'react-native'
+import {
+  View,
+  Text,
+  StatusBar,
+  StyleSheet,
+  FlatList
+} from 'react-native'
+
+import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
+import Card from '../components/card/card'
+import BackIcon from '../components/button/backIcon'
 
 import userData from '../components/dados/userData'
 import GetUserDataApi from '../api/getUserData'
+import GetUserPartyApi from '../api/getUserParty'
 import { AuthContext } from '../components/dados/context'
+
+import defaultStyle from '../styles/defaultStyle'
+import photo from '../assets/profile.png'
+import { pink } from '../styles/color';
 
 const now = new Date(Date.now())
 
 export default function profile({ route, navigation }) {
 
-  const { getCurrentUser } = useContext(AuthContext);
+  const { getCurrentUser, signOut } = useContext(AuthContext);
+
+  const [id, setId] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [birthday, setBirthday] = useState(now);
+  const [parties, setParties] = useState([]);
 
   useFocusEffect(
     useCallback(() => {
-      
+
       let currentUser = getCurrentUser()
       let id = currentUser.id;
-      
+
       navigation.setOptions({
         tabBarVisible: true,
       })
@@ -34,20 +53,9 @@ export default function profile({ route, navigation }) {
           })
         }
       }
-      
-      GetUserDataApi.callGetUserServe(id).then((snapshot) => {
-        if (!snapshot.error) {
-          setEmail(snapshot.email)
-          setName(snapshot.name)
-          setBirthday(new Date(snapshot.birthday))
-        }
-        else {
-          alert(snapshot.error)
-          setEmail(currentUser.email)
-          setName(currentUser.name)
-          setBirthday(new Date(currentUser.birthday))
-        }
-      })
+
+      callUserServer(id)
+      callPartyServe(id)
 
       return () => {
         navigation.setParams({ user: undefined })
@@ -56,33 +64,135 @@ export default function profile({ route, navigation }) {
     }, [route.params && route.params.user])
   )
 
+  function callUserServer(id) {
+    GetUserDataApi
+      .callGetUserServe(id)
+      .then((snapshot) => {
+        if (!snapshot.error) {
+          setEmail(snapshot.email)
+          setName(snapshot.name)
+          setBirthday(new Date(snapshot.birthday))
+          setId(id)
+        }
+        else {
+          alert(snapshot.error)
+          setEmail(currentUser.email)
+          setName(currentUser.name)
+          setBirthday(new Date(currentUser.birthday))
+          setId(currentUser.id)
+        }
+      })
+  }
+
+  async function callPartyServe(id) {
+    GetUserPartyApi.
+      callGetUserPartyServe(id)
+      .then((snapshot) => {
+        if (!snapshot.error) {
+          setParties(snapshot)
+        }
+        else {
+          alert(snapshot.error)
+        }
+      })
+
+
+  }
+
   return (
-    <View>
+    <View style={defaultStyle.container}>
       <StatusBar backgroundColor='black' />
 
-      
-        <View>
-          <Text style={{ color: 'white' }}>
-            {
-              name
-            }
+      <View style={styles.headerProfile}>
+        {getCurrentUser().id != id ?
+          <BackIcon
+            onPress={() => navigation.goBack()}
+          />
+          :
+          <>
+            <FontAwesome
+              name="cog"
+              size={35}
+              color={pink}
+              onPress={() => (alert("Config"))}
+            />
+            <MaterialCommunityIcons
+              name="exit-run"
+              size={35}
+              color={pink}
+              onPress={() => signOut()}
+            />
+          </>
+        }
+      </View>
+
+      <View style={styles.userInfo}>
+        <Avatar
+          rounded
+          source={photo}
+          size="xlarge"
+        />
+
+        <View style={styles.text}>
+          <Text style={styles.name}>
+            {name}
           </Text>
 
           <Text style={{ color: 'white' }}>
-            {
-              email
-            }
+            {email}
           </Text>
 
           <Text style={{ color: 'white' }}>
-            {
-              birthday.toLocaleDateString('pt-Br')
-            }
+            Data de nascimento: {birthday.toLocaleDateString('pt-Br')}
           </Text>
-
         </View>
-      
+      </View>
 
+      <FlatList
+        style={{
+          flex: 1,
+          marginVertical: 50,
+        }}
+        data={parties}
+        keyExtractor={(item) => item.id_festa}
+        renderItem={({ item }) => (
+          <Card
+            item={item}
+            onPostPress={(post) => {
+              //navigation.navigate('moreinfo', { item })
+              alert(post.id_festa)
+            }
+            }
+          />
+        )}
+      />
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  name: {
+    fontSize: 35,
+    color: 'white',
+    fontWeight: 'bold'
+  },
+
+  userInfo: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  headerProfile: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: 50,
+  },
+
+  text: {
+    flex: 1,
+    width: '100%',
+    marginVertical: 15,
+  }
+})
