@@ -20,7 +20,7 @@ router.post('/authenticate', async (req, res) => {
         user.senha = undefined;
         user['tipo'] = 'usuario';
         console.log('Acesso permitido!');
-        res.send({ user });
+        res.json(user);
     }
     else if( productor !== null){
 
@@ -32,7 +32,7 @@ router.post('/authenticate', async (req, res) => {
         productor.senha = undefined;
         productor['tipo'] = 'produtor';
         console.log('Acesso permitido!');
-        res.send({ productor });
+        res.json(productor);
     }
     else{
         return res.status(400).send({ error: 'Usuário não encontrado'})
