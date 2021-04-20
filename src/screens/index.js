@@ -7,6 +7,7 @@ import ProfileScreen from './profile'
 import CreatePartyScreen from './createParty'
 import SearchScreen from './search'
 import MoreInfoScreen from './moreInfo'
+import LoadingScreen from './loading'
 
 export {
   LoginScreen,
@@ -18,4 +19,5 @@ export {
   CreatePartyScreen,
   SearchScreen,
   MoreInfoScreen,
+  LoadingScreen,
 };

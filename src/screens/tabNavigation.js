@@ -33,7 +33,7 @@ export default function tabNavigation() {
 
   return (
     <Tab.Navigator
-      initialRouteName="map"
+      initialRouteName="profile"
       sceneContainerStyle={{ backgroundColor: background }}
       tabBarOptions={{
         style: { backgroundColor: '#121222' },
@@ -86,6 +86,9 @@ export default function tabNavigation() {
       <Tab.Screen
         name="profile"
         component={ProfileScreen}
+        initialParams={{
+          user:null
+        }}
         options={{
           title: () => null,
           tabBarIcon: ({ color, size }) => (

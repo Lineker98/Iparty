@@ -6,7 +6,8 @@ import {
   IpartyScreen,
   LoginScreen,
   SignUpScreen,
-  SignUp2Screen
+  SignUp2Screen,
+  LoadingScreen,
 } from "./index";
 
 import TabNavigation from "./tabNavigation";
@@ -19,28 +20,32 @@ const Stack = createStackNavigator();
 
 function App() {
   const [isUserCurrent, setIsUserCurrent] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
-    
+    //authContext.signOut()
     userData.get().then((snapshot) => {
       if (snapshot && snapshot.id) {
-        setIsUserCurrent(true)
+        authContext.signIn(snapshot)
       }
-
     })
   }, [])
 
   const authContext = useMemo(() => ({
-    signIn: () => {
-      setIsUserCurrent(true);
-    },
-    signUp: () => {
-      setIsUserCurrent(true);
+    signIn: (currentUser) => {
+      userData.set(currentUser).then((snapshot) => {
+        setIsUserCurrent(true)
+        setCurrentUser(snapshot)
+      })
     },
     signOut: () => {
       setIsUserCurrent(false);
+      userData.delet().then(() => { })
+    },
+    getCurrentUser: () => {
+      return currentUser
     }
-  }), [])
+  }), [currentUser.id])
 
   return (
     <AuthContext.Provider value={authContext}>
@@ -83,13 +88,23 @@ function App() {
             </>
           ) : (
             <>
-              <Stack.Screen
-                name="tabNavigation"
-                component={TabNavigation}
-                options={{
-                  headerShown: false,
-                }}
-              />
+              {!currentUser.id ?
+                <Stack.Screen
+                  name="loading"
+                  component={LoadingScreen}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                :
+                <Stack.Screen
+                  name="tabNavigation"
+                  component={TabNavigation}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+              }
             </>
           )}
         </Stack.Navigator>

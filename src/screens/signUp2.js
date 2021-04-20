@@ -34,7 +34,7 @@ export default function signUp2({ route, navigation }) {
   const [password2, setPassword2] = useState("");
   const [date, setDate] = useState(now)
 
-  const { signUp } = useContext(AuthContext);
+  const { signIn } = useContext(AuthContext);
 
   const onChangeDate = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -67,8 +67,7 @@ export default function signUp2({ route, navigation }) {
         .callSignUpServe(data);
 
       if (!currentUser.error) {
-        await userData.set(currentUser);
-        signUp()
+        signIn(currentUser)
       }
       else {
         alert(currentUser.error)

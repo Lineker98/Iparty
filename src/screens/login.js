@@ -30,8 +30,7 @@ export default function login({ navigation }) {
       .callLoginServe(email, password);
 
     if (!currentUser.error) {
-      await userData.set(currentUser);
-      signIn()
+      signIn(currentUser)
     }
     else {
       alert(currentUser.error)
