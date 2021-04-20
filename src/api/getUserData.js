@@ -6,7 +6,7 @@ async function callGetUserServe(id) {
   }
   catch (error) {
     responseJson = {
-      error: "callLoginServe: " + error.message
+      error: "callGetUserServe: " + error.message
     }
   }
 
@@ -15,7 +15,7 @@ async function callGetUserServe(id) {
 
 async function sendUserIdToServer(id) {
 
-  let link = global.URL_API + 'user/' + String(id)
+  let link = global.URL_API + 'user/listuser/' + String(id)
   
   const response = await fetch(link, {
     method: 'GET',

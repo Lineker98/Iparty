@@ -6,7 +6,7 @@ async function callSignUpServe(data) {
   }
   catch (error) {
     responseJson = {
-      error: "callLoginServe: " + error.message
+      error: "callSignUpServe: " + error.message
     }
   }
 

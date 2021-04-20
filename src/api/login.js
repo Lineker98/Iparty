@@ -15,7 +15,7 @@ async function callLoginServe(email,password) {
 
 async function sendEmailPassToServer(email,password) {
 
-  let link = global.URL_API + 'user/authenticate'
+  let link = global.URL_API + 'general/authenticate'
   
 
   const dados = {
