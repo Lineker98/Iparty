@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const prodServices = require('../service/prodServices');
+const generalServices = require('../service/generalServices');
 
 // Pegar produtor pelo id
 router.get('/:id', async function (req, res) {
@@ -35,6 +36,7 @@ router.post('/creatParty', async (req, res) => {
 // registro de produtor e verificação 
 // se é pessoa física ou jurídica
 router.post('/register', async (req, res) => {
+
     
     const { email } = req.body;
     const produtor = req.body;
@@ -42,8 +44,9 @@ router.post('/register', async (req, res) => {
     if(produtor.cpf){
 
         try{
-
+            
             if(await prodServices.getProdutorByEmail(email) !== null){
+                
                 return res.status(400).send({ error: 'Email já cadastrado!'});
             }
 
@@ -102,18 +105,14 @@ router.post('/register', async (req, res) => {
 
 router.get('/listparties/:id', async function (req, res){
 
-    const parties = await prodServices.getParties(req.params.id);
-    console.log('oi')
-    return res.json(parties);
+    try {
 
-    // try {
+        const parties = await prodServices.getParties(req.params.id);
+        res.json(parties);
 
-    //     const parties = await prodServices.getParties(req.params.id);
-    //     res.json(parties);
-
-    // } catch (error) {
-    //     return res.status(400).send({ error: 'Falha ao realizar busca de festas'});
-    // }
+    } catch (error) {
+        return res.status(400).send({ error: 'Falha ao realizar busca de festas'});
+    }
 });
 
 module.exports = router;

@@ -44,3 +44,4 @@ exports.getParties = function(id_produtor){
     return prodData.getParties(id_produtor);
 };
 
+
