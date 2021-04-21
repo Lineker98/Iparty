@@ -100,4 +100,20 @@ router.post('/register', async (req, res) => {
 
 });
 
+router.get('/listparties/:id', async function (req, res){
+
+    const parties = await prodServices.getParties(req.params.id);
+    console.log('oi')
+    return res.json(parties);
+
+    // try {
+
+    //     const parties = await prodServices.getParties(req.params.id);
+    //     res.json(parties);
+
+    // } catch (error) {
+    //     return res.status(400).send({ error: 'Falha ao realizar busca de festas'});
+    // }
+});
+
 module.exports = router;

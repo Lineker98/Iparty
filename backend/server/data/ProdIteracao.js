@@ -47,3 +47,9 @@ exports.getAllDataJuridica = function(id_produtor){
 exports.deleteProductor = function(id_produtor){
     return database.result('delete FROM produtor WHERE id_produtor = $1', [id_produtor]);
 };
+
+// Pegar todas as festa criadas pelo produtor x
+exports.getParties = function(id_produtor){
+    return database.manyOrNone("SELECT * FROM festa WHERE id_festa IN " +
+    "(SELECT id_festa FROM produz WHERE id_produtor = $1)", [id_produtor]);
+};

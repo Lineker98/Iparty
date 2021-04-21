@@ -36,7 +36,11 @@ exports.getAllDataJuridica = function(identificador){
     return prodData.getAllDataJuridica(identificador);
 };
 
-exports.deleteProductor = function(id){
-    return prodData.deleteProductor(id);
+exports.deleteProductor = function(id_produtor){
+    return prodData.deleteProductor(id_produtor);
+};
+
+exports.getParties = function(id_produtor){
+    return prodData.getParties(id_produtor);
 };
 

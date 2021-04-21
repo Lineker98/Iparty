@@ -15,7 +15,7 @@ exports.creatUser = function(user) {
 };
 
 exports.getPartiesByUser = function(id){
-    return database.manyOrNone("SELECT * FROM festa WHERE id_festa in" +
+    return database.manyOrNone("SELECT * FROM festa WHERE id_festa IN" +
     "(SELECT id_festa FROM frequenta WHERE id_usuario = $1)", [id]);
 };
 
