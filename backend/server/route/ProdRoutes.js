@@ -2,12 +2,34 @@ const express = require('express');
 const router = express.Router();
 const prodServices = require('../service/prodServices');
 
-
+// Pegar produtor pelo id
 router.get('/:id', async function (req, res) {
     const produtor = await prodServices.getProdutor(req.params.id);
     res.json(produtor);
 });
 
+//Criação de festas
+router.post('/creatParty', async (req, res) => {
+
+    const party  = req.body;
+    console.log(party)
+
+    try {
+        
+        newParty = await prodServices.creatParty(party);
+        console.log('Festa Criada com sucesso!');
+        return res.send( newParty );
+
+
+    }catch (error) {
+        return res.status(400).send({ error: 'Falha na criação da festa!'});
+    }
+
+});
+
+
+// registro de produtor e verificação 
+// se é pessoa física ou jurídica
 router.post('/register', async (req, res) => {
     
     const { email } = req.body;
@@ -31,7 +53,7 @@ router.post('/register', async (req, res) => {
                 console.log('Cadastrado com sucesso!')
 
                 newProdutor.senha = undefined;
-                return res.send({ newProdutor });
+                return res.send( newProdutor );
 
             } catch (error) {
                 await prodServices.deleteProductor(identificador.id_produtor)
@@ -59,7 +81,7 @@ router.post('/register', async (req, res) => {
                 console.log('Cadastrado com sucesso!');
 
                 newProdutor.senha = undefined;
-                return res.send({ newProdutor });
+                return res.send( newProdutor );
 
             } catch (error) {
                 await prodServices.deleteProductor(identificador.id_produtor)

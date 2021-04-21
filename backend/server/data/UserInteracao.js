@@ -2,11 +2,11 @@ const database = require('../infra/database');
 
 
 exports.getUser = function (id){
-    return database.oneOrNone('select * from usuario where id_usuario = $1', [id]);
+    return database.oneOrNone('SELECT * FROM usuario WHERE id_usuario = $1', [id]);
 };
 
 exports.getUserByEmail = function(email){
-    return database.oneOrNone('select * from usuario where email = $1', [email]);
+    return database.oneOrNone('SELECT * FROM usuario WHERE email = $1', [email]);
 }
 
 exports.creatUser = function (user) {
@@ -15,12 +15,12 @@ exports.creatUser = function (user) {
 };
 
 exports.getPartiesByUser = function(id){
-    return database.manyOrNone("select * from festa where id_festa in" +
-    "(select id_festa from frequenta where id_usuario = $1)", [id]);
+    return database.manyOrNone("SELECT * FROM festa WHERE id_festa in" +
+    "(SELECT id_festa FROM frequenta WHERE id_usuario = $1)", [id]);
 };
 
 exports.getUserByName = function(name){
-    return database.manyOrNone("select * from usuario where nome like $1", ['%' + name + '%']);
+    return database.manyOrNone("SELECT * FROM usuario WHERE nome like $1", ['%' + name + '%']);
 };
 
 exports.updateUser = function (id_usuario, user){
@@ -29,5 +29,5 @@ exports.updateUser = function (id_usuario, user){
 }
 
 // exports.deleteUser = function (id) {
-//     return database.none('delete from usuario where id_usuario = $1', [id]);
+//     return database.none('delete FROM usuario WHERE id_usuario = $1', [id]);
 // }

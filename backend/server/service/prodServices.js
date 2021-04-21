@@ -12,6 +12,10 @@ exports.creatProdutor = function(produtor){
     return prodData.creatProdutor(produtor);
 };
 
+exports.creatParty = function(party){
+    return prodData.creatParty(party);
+}
+
 exports.inserePessoaFisica = function(id, cpf){
     return prodData.inserePessoaFisica(id, cpf);
 };
