@@ -22,9 +22,11 @@ exports.getPartiesByUser = function(id){
 exports.getUserByName = function(name){
     return database.manyOrNone("select * from usuario where nome like $1", ['%' + name + '%']);
 };
-//  exports.updateUser = function (id, user){
-//      return database.none('update usuario set ...')
-// }
+
+exports.updateUser = function (id_usuario, user){
+    return database.one('UPDATE usuario SET nome = $1, cpf = $2, email = $3, senha = $4, data_nascimento = $5 WHERE id_usuario = $6 returning *',
+    [user.nome, user.cpf, user.email, user.senha, user.data_nascimento, id_usuario]);
+}
 
 // exports.deleteUser = function (id) {
 //     return database.none('delete from usuario where id_usuario = $1', [id]);

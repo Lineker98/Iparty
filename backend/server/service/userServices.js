@@ -24,10 +24,10 @@ exports.getUserByName = function(name){
     return userData.getUserByName(name);
 };
 
+exports.updateUser = function(id_usuario, user){
+    return userData.updateUser(id_usuario, user)
+};
+
 // exports.deleteUser = function (id) {
 //     return userData.delete(id);
 // };
-
-exports.updateUser = function(id, user){
-    return userData.updateUser(id, user)
-};
