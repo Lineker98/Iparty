@@ -57,7 +57,8 @@ router.post('/register', async (req, res) => {
                 console.log('Cadastrado com sucesso!')
 
                 newProdutor.senha = undefined;
-                return res.send( newProdutor );
+                newProdutor['tipo'] = 'Produtor'
+                res.send( newProdutor );
 
             } catch (error) {
                 await prodServices.deleteProductor(identificador.id_produtor)
@@ -84,8 +85,8 @@ router.post('/register', async (req, res) => {
                 const newProdutor = await prodServices.getAllDataJuridica(identificador.id_produtor);
                 console.log('Cadastrado com sucesso!');
 
-                newProdutor.senha = undefined;
-                return res.send( newProdutor );
+                newProdutor['tipo'] = 'Produtor'
+                res.send( newProdutor );
 
             } catch (error) {
                 await prodServices.deleteProductor(identificador.id_produtor)
