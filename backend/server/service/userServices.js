@@ -28,6 +28,6 @@ exports.getUserByName = function(name){
 //     return userData.delete(id);
 // };
 
-// exports.updateUser = function(id, user){
-//      return userData.updateUser(id, user)
-// };
+exports.updateUser = function(id, user){
+    return userData.updateUser(id, user)
+};
