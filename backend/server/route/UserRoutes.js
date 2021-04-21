@@ -32,22 +32,26 @@ router.post('/register', async (req, res) => {
     
 });
 
+// Listagem de todas as festas frequentadas pelo usuario
 router.get('/listparties/:id', async function (req, res){
     const parties = await userService.getPartiesByUser(req.params.id);
     res.json(parties);
 });
 
+// Listar usuários pelo nome recebido
 router.get('/listusers/:name', async function (req, res) {
     const users = await userService.getUserByName(req.params.name);
     res.send({users});
 })
  
+// Pegar usuário pelo ID
 router.get('/listuser/:id', async function (req, res) {
     const user = await userService.getUser(req.params.id);
     res.json(user);
 });
 
- router.put('/updateUser/:id', async function (req, res) {
+// Atualizar informações do usuário
+router.put('/updateUser/:id', async function (req, res) {
 
     const user = req.body;
     const id_usuario = req.params.id
@@ -61,6 +65,23 @@ router.get('/listuser/:id', async function (req, res) {
         console.log('Usuáio não encontrado!');
         return res.status(204);
     }
+});
+
+// Registrar as festas frequentadas pelo usário
+router.post('/UserInParty', async function (req, res) {
+
+    const id_usuario = req.body.id_usuario;
+    const id_festa = req.body.id_festa;
+
+    try {
+        await userService.userInParty(id_usuario, id_festa);
+        console.log('Registro na festa realizado com sucesso!');
+        res.send({id_usuario, id_festa});
+
+    } catch (error) {
+        console.log('Não foi possível realizar o registro na festa!');
+        return res.status(400);
+    };
 });
 
 // router.delete('/:id',  async function (req, res) {

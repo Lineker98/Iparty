@@ -28,6 +28,10 @@ exports.updateUser = function(id_usuario, user){
     return userData.updateUser(id_usuario, user)
 };
 
+exports.userInParty = function(id_usuario, id_festa){
+    return userData.userInParty(id_usuario, id_festa);
+};
+
 // exports.deleteUser = function (id) {
 //     return userData.delete(id);
 // };
