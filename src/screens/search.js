@@ -11,6 +11,7 @@ import searchApi from "../api/searchUser";
 
 import defaultStyle from "../styles/defaultStyle";
 import UserBar from "../components/button/userBar";
+import { background } from "../styles/color";
 
 export default function search({ user, navigation }) {
 
@@ -44,7 +45,7 @@ export default function search({ user, navigation }) {
 
   return (
     <View style={defaultStyle.container}>
-      <StatusBar backgroundColor='black' />
+      <StatusBar backgroundColor={background} />
       <Text style={defaultStyle.title}>Pesquisar</Text>
 
       <TextInput

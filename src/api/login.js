@@ -38,11 +38,12 @@ async function sendEmailPassToServer(email,password) {
   }
   else {
     return {
-      cpf: responseJson.user.cpf,
-      birthday: responseJson.user.data_nascimento,
-      email: responseJson.user.email,
-      id: responseJson.user.id_usuario,
-      name: responseJson.user.nome,
+      cpf: responseJson.cpf,
+      birthday: responseJson.data_nascimento,
+      email: responseJson.email,
+      id: responseJson.id_usuario,
+      name: responseJson.nome,
+      type: responseJson.tipo,
     }
   }
  }

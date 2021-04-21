@@ -24,7 +24,7 @@ export default function tabNavigation() {
   useEffect(() => {
 
     userData.get().then((snapshot) => {
-      if (snapshot && snapshot.type == 'Produtor') {
+      if (snapshot && snapshot.type == 'produtor') {
         setIsUser(false)
       }
 
@@ -33,7 +33,7 @@ export default function tabNavigation() {
 
   return (
     <Tab.Navigator
-      initialRouteName="search"
+      initialRouteName="profile"
       sceneContainerStyle={{ backgroundColor: background }}
       tabBarOptions={{
         style: { backgroundColor: '#121222' },

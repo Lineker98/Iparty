@@ -21,7 +21,7 @@ import { AuthContext } from '../components/dados/context'
 
 import defaultStyle from '../styles/defaultStyle'
 import photo from '../assets/profile.png'
-import { pink } from '../styles/color';
+import { background, pink } from '../styles/color';
 
 const now = new Date(Date.now())
 
@@ -101,7 +101,7 @@ export default function profile({ route, navigation }) {
 
   return (
     <View style={defaultStyle.container}>
-      <StatusBar backgroundColor='black' />
+      <StatusBar backgroundColor={background} />
 
       <View style={styles.headerProfile}>
         {getCurrentUser().id != id ?
