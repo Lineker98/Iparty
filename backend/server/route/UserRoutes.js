@@ -67,6 +67,33 @@ router.put('/updateUser/:id', async function (req, res) {
     }
 });
 
+router.get('/dataParties/:id', async function (req, res) {
+
+    const interval = parseInt(req.params.id);
+
+    now = new Date;
+
+    const Year = now.getFullYear();
+    const Month = now.getMonth();
+    const Day = now.getDate();
+    
+    period = new Date(Year, Month, Day + interval);
+    today = new Date(Year, Month, Day);
+    
+
+    try {
+
+        const parties = await userService.partiesByDays(today, period);
+        console.log('Festas encontradas');
+        res.json(parties);
+
+    } catch (error) {
+        console.log('Erro na busca por festas');
+        return res.status(400).send({error: "Error na busca por festas"})
+    }
+
+})
+
 // Registrar as festas frequentadas pelo usário
 router.post('/UserInParty', async function (req, res) {
 
@@ -80,7 +107,7 @@ router.post('/UserInParty', async function (req, res) {
 
     } catch (error) {
         console.log('Não foi possível realizar o registro na festa!');
-        return res.status(400);
+        return res.status(400).send({error: "Não foi possível realizar o registro na festa"})
     };
 });
 

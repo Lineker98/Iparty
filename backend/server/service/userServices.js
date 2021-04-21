@@ -32,6 +32,10 @@ exports.userInParty = function(id_usuario, id_festa){
     return userData.userInParty(id_usuario, id_festa);
 };
 
+exports.partiesByDays = function(today, period){
+    return userData.partiesByDay(today, period);
+}
+
 // exports.deleteUser = function (id) {
 //     return userData.delete(id);
 // };
