@@ -161,8 +161,7 @@ export default function profile({ route, navigation }) {
           <Card
             item={item}
             onPostPress={(post) => {
-              //navigation.navigate('moreinfo', { item })
-              alert(post.id_festa)
+              navigation.navigate('moreinfo', { item })
             }
             }
           />
