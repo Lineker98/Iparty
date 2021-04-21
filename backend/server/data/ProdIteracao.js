@@ -17,7 +17,12 @@ exports.creatParty = function(party){
     return database.one('INSERT INTO Festa (preco, inicio, fim, descricao, longitude, latitude, nome_festa)' +
     'VALUES ($1, $2, $3, $4, $5, $6, $7) returning *',
     [party.preco, party.inicio, party.fim, party.descricao, party.longitude, party.latitude, party.nome_festa]);
-}
+};
+
+exports.partyByProductor = function(id_produtor, id_festa){
+    return database.none('INSERT INTO Produz (id_produtor, id_festa) VALUES ($1, $2)',
+    [id_produtor, id_festa]);
+};
 
 exports.inserePessoaFisica = function(id_produtor, cpf){
     return database.oneOrNone('INSERT INTO pessoafisica (id_produtor, cpf) VALUES ($1, $2)', [id_produtor, cpf]);

@@ -12,11 +12,15 @@ router.get('/:id', async function (req, res) {
 router.post('/creatParty', async (req, res) => {
 
     const party  = req.body;
-    console.log(party)
+    const id_produtor = req.body.id_produtor;
 
     try {
         
         newParty = await prodServices.creatParty(party);
+        const id_festa = newParty.id_festa;
+
+        await prodServices.partyByProductor(id_produtor, id_festa);
+
         console.log('Festa Criada com sucesso!');
         return res.send( newParty );
 

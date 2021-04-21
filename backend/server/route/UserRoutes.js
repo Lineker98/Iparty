@@ -19,7 +19,7 @@ router.post('/register', async (req, res) => {
 
         if(await userService.getUserByEmail( email ) !== null){
             return res.status(400).send({ error: 'Email já cadastrado!'});
-        }
+        };
 
         const newUser = await userService.creatUser(user);
         newUser.senha = undefined;
