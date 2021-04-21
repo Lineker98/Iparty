@@ -44,8 +44,7 @@ router.post('/register', async (req, res) => {
     if(produtor.cpf){
 
         try{
-            
-            if(await prodServices.getProdutorByEmail(email) !== null){
+            if(await generalServices.existsEntityByEmail(email) == true){
                 
                 return res.status(400).send({ error: 'Email já cadastrado!'});
             }
@@ -76,7 +75,7 @@ router.post('/register', async (req, res) => {
 
         try{
 
-            if(await prodServices.getProdutorByEmail(email) !== null){
+            if(await generalServices.existsEntityByEmail(email) == true){
                 return res.status(400).send({ error: 'Email já cadastrado!'});
             }
 

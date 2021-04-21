@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const userService = require("../service/userServices");
+const generalServices = require('../service/generalServices');
+
 
 // All users
 // router.get('/', async function (req, res) {
@@ -17,7 +19,7 @@ router.post('/register', async (req, res) => {
 
     try{
 
-        if(await userService.getUserByEmail( email ) !== null){
+        if(await generalServices.existsEntityByEmail( email ) == true){
             return res.status(400).send({ error: 'Email já cadastrado!'});
         };
 

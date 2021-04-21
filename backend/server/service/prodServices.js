@@ -1,7 +1,7 @@
 const prodData = require("../data/ProdIteracao");
 
-exports.getProdutor = function (identificador) {
-    return prodData.getProdutor(identificador);
+exports.getProdutor = function (id_produtor) {
+    return prodData.getProdutor(id_produtor);
 };
 
 exports.getProdutorByEmail = function(email){
@@ -28,12 +28,12 @@ exports.inserePessoaJuridica = function(id, cnpj){
     return prodData.inserePessoaJuridica(id, cnpj);
 };
 
-exports.getAllDataFisica = function(identificador){
-    return prodData.getAllDataFisica(identificador);
+exports.getAllDataFisica = function(id_produtor){
+    return prodData.getAllDataFisica(id_produtor);
 };
 
-exports.getAllDataJuridica = function(identificador){
-    return prodData.getAllDataJuridica(identificador);
+exports.getAllDataJuridica = function(id_produtor){
+    return prodData.getAllDataJuridica(id_produtor);
 };
 
 exports.deleteProductor = function(id_produtor){

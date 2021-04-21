@@ -1,11 +1,11 @@
 const prodData = require("../data/ProdIteracao");
 const userData = require("../data/UserInteracao");
 
-
-exports.existsEntityByEmail() = function(email){
+exports.existsEntityByEmail = async function(email){
 
     try {
 
+       
         if(await prodData.getProdutorByEmail(email) === null){
 
             if(await userData.getUserByEmail(email) === null){
