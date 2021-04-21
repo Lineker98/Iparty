@@ -43,15 +43,25 @@ router.get('/listusers/:name', async function (req, res) {
 })
  
 router.get('/listuser/:id', async function (req, res) {
-     const user = await userService.getUser(req.params.id);
-     res.json(user);
+    const user = await userService.getUser(req.params.id);
+    res.json(user);
 });
 
-// router.put('/:id', async function (req, res) {
-//     const user = req.body;
-//     await userService.updateUser(req.params.id, user);
-//     res.end();
-// });
+ router.put('/updateUser/:id', async function (req, res) {
+
+    const user = req.body;
+    const id_usuario = req.params.id
+    try {
+
+        const newUser = await userService.updateUser(id_usuario, user);
+        console.log('Usuário atualizado com sucesso!');
+        res.json( newUser )
+
+    } catch (error) {
+        console.log('Usuáio não encontrado!');
+        return res.status(204);
+    }
+});
 
 // router.delete('/:id',  async function (req, res) {
 //     await userService.deleteUser(req.params.id);
