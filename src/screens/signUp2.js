@@ -33,7 +33,7 @@ export default function signUp2({ route, navigation }) {
   const [password2, setPassword2] = useState("");
   const [date, setDate] = useState(now)
 
-  const { signIn } = useContext(AuthContext);
+  const { signIn, signOut } = useContext(AuthContext);
 
   const onChangeDate = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -53,10 +53,10 @@ export default function signUp2({ route, navigation }) {
       tipo: route.params.type
     }
 
-    if(cpf.length == 11){
+    if (cpf.length == 11) {
       data.cpf = cpf
     }
-    else{
+    else {
       data.cnpj = cpf
     }
 
@@ -67,7 +67,9 @@ export default function signUp2({ route, navigation }) {
         .callSignUpServe(data);
 
       if (!currentUser.error) {
-        signIn(currentUser)
+        alert("Conta registrada com sucesso")
+        signOut(currentUser)
+        navigation.navigate('iparty')
       }
       else {
         alert(currentUser.error)
@@ -191,11 +193,11 @@ const styles = StyleSheet.create({
 
   date: {
     ...defaultStyle.input,
-    backgroundColor:pink,
-    opacity:0.85,
+    backgroundColor: pink,
+    opacity: 0.85,
     justifyContent: 'center',
-    width:'50%',
-    alignSelf:'center',
+    width: '50%',
+    alignSelf: 'center',
     alignItems: 'center',
   },
 })

@@ -56,7 +56,7 @@ export default function profile({ route, navigation }) {
           })
         }
       }
-
+      
       callUserServer(id, type)
       callPartyServe(id, type)
 
@@ -68,9 +68,12 @@ export default function profile({ route, navigation }) {
   )
 
   function callUserServer(id, type) {
+    let currentUser = getCurrentUser()
+
     GetUserDataApi
       .callGetUserServe(id, type)
       .then((snapshot) => {
+        
         if (!snapshot.error) {
           setEmail(snapshot.email)
           setName(snapshot.name)
@@ -146,14 +149,14 @@ export default function profile({ route, navigation }) {
           </Text>
 
           {
-            !birthday ? null :
+            getCurrentUser().type == 'produtor' ? null :
               <Text style={{ color: 'white' }}>
                 Data de nascimento: {birthday.toLocaleDateString('pt-Br')}
               </Text>
           }
 
           {
-            !phone ? null :
+            getCurrentUser().type != 'produtor'? null :
               <Text style={{ color: 'white' }}>
                 Telefone: {phone}
               </Text>

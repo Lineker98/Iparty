@@ -6,7 +6,7 @@ async function callUserSearchServe(name) {
   }
   catch (error) {
     responseJson = {
-      error: "callGetUserPartyServe: " + error.message
+      error: "callUserSearchServe: " + error.message
     }
   }
 

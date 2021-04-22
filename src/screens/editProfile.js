@@ -109,7 +109,7 @@ export default function editProfile({ route, navigation }) {
 
     console.log(info)
 
-    if (!info) {
+    if (info.message) {
       signOut()
     }
     else {

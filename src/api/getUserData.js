@@ -31,7 +31,12 @@ async function sendIdToServer(id, type) {
 
   let responseJson = await response.json();
 
-  if (responseJson.error) {
+  if (!responseJson) {
+    return {
+      error: "callGetUserServe"
+    }
+  }
+  else if (responseJson.error) {
     return responseJson
   }
   else {
@@ -40,8 +45,8 @@ async function sendIdToServer(id, type) {
       password: responseJson.senha,
       birthday: responseJson.data_nascimento,
       email: responseJson.email,
-      id: responseJson.id_usuario ? 
-      responseJson.id_usuario: responseJson.id_produtor,
+      id: responseJson.id_usuario ?
+        responseJson.id_usuario : responseJson.id_produtor,
       name: responseJson.nome,
       phone: responseJson.telefone,
       type: responseJson.tipo,

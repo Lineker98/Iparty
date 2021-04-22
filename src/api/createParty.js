@@ -6,7 +6,7 @@ async function callPartyServe(data) {
   }
   catch (error) {
     responseJson = {
-      error: "callLoginServe: " + error.message
+      error: "callPartyServe: " + error.message
     }
   }
 

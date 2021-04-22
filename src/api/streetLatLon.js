@@ -6,7 +6,7 @@ async function callGetAddressByLatLon(lat, lon) {
   }
   catch (error) {
     responseJson = {
-      error: "callGetUserServe: " + error.message
+      error: "callGetAddressByLatLon: " + error.message
     }
   }
 
@@ -48,7 +48,7 @@ async function callGetAddress(text) {
   }
   catch (error) {
     responseJson = {
-      error: "callGetUserServe: " + error.message
+      error: "callGetAddress: " + error.message
     }
   }
 
