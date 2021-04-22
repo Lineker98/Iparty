@@ -17,7 +17,7 @@ async function sendIdToServer(id, type, data) {
   let link;
 
   if (type != 'produtor') {
-    link = global.URL_API + 'updateUser/' + String(id)
+    link = global.URL_API + 'user/updateUser/' + String(id)
   }
   else {
     link = global.URL_API + 'produtor/' + String(id)

@@ -16,11 +16,14 @@ async function callDeleteServe(id, type) {
 async function sendIdToServer(id, type) {
   let link;
 
-  if (type != 'produtor') {
-    link = global.URL_API + 'user/' + String(id)
+  if (type == 'produtor') {
+    link = global.URL_API + 'produtor/' + String(id)
+  }
+  else if (type == 'festa') {
+    link = global.URL_API + 'produtor/deleteParty/' + String(id)
   }
   else {
-    link = global.URL_API + 'produtor/' + String(id)
+    link = global.URL_API + 'user/' + String(id)
   }
   const response = await fetch(link, {
     method: 'DELETE',

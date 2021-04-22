@@ -88,7 +88,7 @@ export default function editProfile({ route, navigation }) {
       })
   }
 
-  async function callPartyServe(id, type) {
+  function callPartyServe(id, type) {
     GetUserPartyApi.
       callGetUserPartyServe(id, type)
       .then((snapshot) => {
@@ -106,7 +106,7 @@ export default function editProfile({ route, navigation }) {
       .callDeleteServe(
         getCurrentUser().id, getCurrentUser().type
       )
-    
+    alert("Conta excluida com sucesso")
     signOut()
   }
 
@@ -177,14 +177,6 @@ export default function editProfile({ route, navigation }) {
               onChangeText={setPassword}
             />
 
-            {/* {
-    "cpf": "48466715696", 
-    "email": "Cuidado2@reverbnation.com", 
-    "nome": "Lineker",
-    "senha": "XUbyQwm",
-    "avaliacao": "5",
-    "telefone": "+235 (371) 503-0394"
-} */}
             {
               getCurrentUser().type == 'produtor' ? null :
                 <Calender
@@ -209,28 +201,36 @@ export default function editProfile({ route, navigation }) {
             }
           </View>
         </View>
-        <FlatList
-          style={{
-            flex: 2,
-            width: '110%',
-          }}
-          data={parties}
-          keyExtractor={(item) => item.id_festa}
-          horizontal={true}
-          renderItem={({ item }) => (
-            <View style={styles.viewCard}>
-              <Card
-                item={item}
-              />
-              <AntDesign
-                name="delete"
-                size={30}
-                color={pink}
-                onPress={() => alert('excluir')}
-              />
-            </View>
-          )}
-        />
+
+        {getCurrentUser().type != 'produtor' ? null :
+          <FlatList
+            style={{
+              flex: 2,
+              width: '110%',
+            }}
+            data={parties}
+            keyExtractor={(item) => item.id_festa}
+            horizontal={true}
+            renderItem={({ item }) => (
+              <View style={styles.viewCard}>
+                <Card
+                  item={item}
+                />
+                <AntDesign
+                  name="delete"
+                  size={30}
+                  color={pink}
+                  onPress={() => deleteApi
+                    .callDeleteServe(
+                      item.id_festa, 'festa'
+                    ).then(() => {
+                      callPartyServe(getCurrentUser().id, getCurrentUser().type)
+                    })}
+                />
+              </View>
+            )}
+          />
+        }
 
         <LoadingButton
           text="Atualizar"
@@ -284,5 +284,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+
+  dateText: {
+    color: 'white',
+    fontWeight: 'bold'
+  },
+
+  date: {
+    ...defaultStyle.input,
+    backgroundColor: pink,
+    justifyContent: 'center',
+    width: '50%',
+    alignSelf: 'center',
+    alignItems: 'center',
+    margin: 20,
   },
 })
