@@ -1,8 +1,8 @@
-async function callGetUserPartyServe(id, type) {
+async function callGetPartyServe(number) {
   let responseJson = {}
 
   try {
-    responseJson = await sendUserIdToServer(id, type)
+    responseJson = await sendNumberToServer(number)
   }
   catch (error) {
     responseJson = {
@@ -13,17 +13,9 @@ async function callGetUserPartyServe(id, type) {
   return responseJson
 }
 
-async function sendUserIdToServer(id, type) {
-  let link;
-
-  if (type = 'produtor') {
-    link = global.URL_API + 'produtor/listparties/' + String(id)
-  }
-  else {
-    link = global.URL_API + 'user/listparties/' + String(id)
-  }
-
-
+async function sendNumberToServer(number) {
+  let link = global.URL_API + 'user/dataParties/' + String(number)
+  
   const response = await fetch(link, {
     method: 'GET',
     headers: {
@@ -34,12 +26,10 @@ async function sendUserIdToServer(id, type) {
   let responseJson = await response.json();
 
   return responseJson
-
-
 }
 
 const responseApi = {
-  callGetUserPartyServe,
+  callGetPartyServe,
 };
 
 export default responseApi;

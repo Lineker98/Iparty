@@ -14,9 +14,15 @@ async function callSignUpServe(data) {
 }
 
 async function sendUserDataToServer(data) {
+  let link;
 
-  let link = global.URL_API + 'user/register'
-  
+  if (data.tipo == 'usuario') {
+    link = global.URL_API + 'user/register'
+  }
+  else {
+    link = global.URL_API + 'produtor/register'
+  }
+
   const response = await fetch(link, {
     method: 'POST',
     headers: {
@@ -32,14 +38,17 @@ async function sendUserDataToServer(data) {
   }
   else {
     return {
-      cpf: responseJson.newUser.cpf,
-      birthday: responseJson.newUser.data_nascimento,
-      email: responseJson.newUser.email,
-      id: responseJson.newUser.id_usuario,
-      name: responseJson.newUser.nome,
+      cpf: responseJson.cpf ?
+        responseJson.cpf : responseJson.cnpj,
+      birthday: responseJson.data_nascimento,
+      email: responseJson.email,
+      id: responseJson.id_usuario ?
+        responseJson.id_usuario : responseJson.newUser.id_produtor,
+      name: responseJson.nome,
+      phone: responseJson.telefone,
     }
   }
- }
+}
 
 const responseApi = {
   callSignUpServe,

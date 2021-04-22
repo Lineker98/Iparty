@@ -21,7 +21,7 @@ import { AuthContext } from '../components/dados/context'
 
 import defaultStyle from '../styles/defaultStyle'
 import photo from '../assets/profile.png'
-import { pink } from '../styles/color';
+import { background, pink } from '../styles/color';
 
 const now = new Date(Date.now())
 
@@ -34,12 +34,14 @@ export default function profile({ route, navigation }) {
   const [name, setName] = useState("");
   const [birthday, setBirthday] = useState(now);
   const [parties, setParties] = useState([]);
+  const [phone, setPhone] = useState([]);
 
   useFocusEffect(
     useCallback(() => {
 
       let currentUser = getCurrentUser()
       let id = currentUser.id;
+      let type = currentUser.type;
 
       navigation.setOptions({
         tabBarVisible: true,
@@ -48,15 +50,16 @@ export default function profile({ route, navigation }) {
       if (route.params && route.params.user) {
         if (route.params.user.id != id) {
           id = route.params.user.id;
+          type = route.params.user.type;
           navigation.setOptions({
             tabBarVisible: false,
           })
         }
       }
 
-      callUserServer(id)
-      callPartyServe(id)
-
+      callUserServer(id, type)
+      callPartyServe(id, type)
+      
       return () => {
         navigation.setParams({ user: undefined })
       }
@@ -64,15 +67,17 @@ export default function profile({ route, navigation }) {
     }, [route.params && route.params.user])
   )
 
-  function callUserServer(id) {
+  function callUserServer(id, type) {
     GetUserDataApi
-      .callGetUserServe(id)
+      .callGetUserServe(id, type)
       .then((snapshot) => {
         if (!snapshot.error) {
           setEmail(snapshot.email)
           setName(snapshot.name)
-          setBirthday(new Date(snapshot.birthday))
+          setBirthday(snapshot.birthday ?
+            new Date(snapshot.birthday) : null)
           setId(id)
+          setPhone(snapshot.phone)
         }
         else {
           alert(snapshot.error)
@@ -84,9 +89,9 @@ export default function profile({ route, navigation }) {
       })
   }
 
-  async function callPartyServe(id) {
+  async function callPartyServe(id, type) {
     GetUserPartyApi.
-      callGetUserPartyServe(id)
+      callGetUserPartyServe(id,type)
       .then((snapshot) => {
         if (!snapshot.error) {
           setParties(snapshot)
@@ -95,13 +100,11 @@ export default function profile({ route, navigation }) {
           alert(snapshot.error)
         }
       })
-
-
   }
 
   return (
     <View style={defaultStyle.container}>
-      <StatusBar backgroundColor='black' />
+      <StatusBar backgroundColor={background} />
 
       <View style={styles.headerProfile}>
         {getCurrentUser().id != id ?
@@ -142,9 +145,20 @@ export default function profile({ route, navigation }) {
             {email}
           </Text>
 
-          <Text style={{ color: 'white' }}>
-            Data de nascimento: {birthday.toLocaleDateString('pt-Br')}
-          </Text>
+          {
+            !birthday ? null :
+              <Text style={{ color: 'white' }}>
+                Data de nascimento: {birthday.toLocaleDateString('pt-Br')}
+              </Text>
+          }
+
+          {
+            !phone ? null :
+              <Text style={{ color: 'white' }}>
+                Telefone: {phone}
+              </Text>
+          }
+
         </View>
       </View>
 
@@ -152,8 +166,8 @@ export default function profile({ route, navigation }) {
         style={{
           flex: 2,
           marginTop: 20,
-          height:'100%',
-          
+          height: '100%',
+
         }}
         data={parties}
         keyExtractor={(item) => item.id_festa}
@@ -161,8 +175,7 @@ export default function profile({ route, navigation }) {
           <Card
             item={item}
             onPostPress={(post) => {
-              //navigation.navigate('moreinfo', { item })
-              alert(post.id_festa)
+              navigation.navigate('moreinfo', { item })
             }
             }
           />

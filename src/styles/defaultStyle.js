@@ -4,7 +4,7 @@ import { pink, darkBlue, background } from "./color";
 export default StyleSheet.create({
   container: {
     flex: 1,
-    width: "90%",
+    width: "94%",
     alignSelf: "center",
     backgroundColor: background,
   },
@@ -12,7 +12,8 @@ export default StyleSheet.create({
   background: {
     flexGrow: 1,
     width: "100%",
-    backgroundColor: "black",
+    height:'100%',
+    backgroundColor: background,
   },
 
   scrollView: {
@@ -38,8 +39,9 @@ export default StyleSheet.create({
 
   inputHorizontal: {
     padding: 10,
+    color:'white',
     height: 140,
-    borderColor: "grey",
+    backgroundColor:darkBlue,
     borderWidth: 1,
     borderRadius: 10,
     marginBottom: 20,
@@ -51,7 +53,7 @@ export default StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 5,
+    borderRadius: 10,
     height: 60,
     marginBottom: 15,
   },
