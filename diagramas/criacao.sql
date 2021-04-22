@@ -58,8 +58,8 @@ CREATE TABLE Produz (
   	id_festa int,
 	
   	PRIMARY KEY (id_produtor, id_festa),
-	FOREIGN KEY (id_produtor) REFERENCES Produtor (id_produtor),
-		ON DELETE CASCADE ON UPDATE CASCADE
+	FOREIGN KEY (id_produtor) REFERENCES Produtor (id_produtor)
+		ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (id_festa) REFERENCES Festa (id_festa)
 		ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -69,8 +69,8 @@ CREATE TABLE Frequenta (
   	id_festa int,
   
 	PRIMARY KEY (id_usuario, id_festa),
-	FOREIGN KEY (id_usuario) REFERENCES Usuario (id_usuario),
-		ON DELETE CASCADE ON UPDATE CASCADE
+	FOREIGN KEY (id_usuario) REFERENCES Usuario (id_usuario)
+		ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (id_festa) REFERENCES Festa (id_festa)
 		ON DELETE CASCADE ON UPDATE CASCADE
 );
