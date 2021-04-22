@@ -58,13 +58,9 @@ router.get('/listuser/:id', async function (req, res) {
 router.put('/updateUser/:id', async function (req, res) {
 
     const user = req.body;
-    const email = user.email;
     const id_usuario = req.params.id;
-    try {
 
-        if(await generalServices.existsEntityByEmail( email ) == true){
-            return res.status(400).send({ error: 'Email já cadastrado!'});
-        }
+    try {
         const newUser = await userService.updateUser(id_usuario, user);
         console.log('Usuário atualizado com sucesso!');
         res.json( newUser )
@@ -120,6 +116,7 @@ router.post('/UserInParty', async function (req, res) {
 });
 
 router.delete('/:id',  async function (req, res) {
+    
     await userService.deleteUser(req.params.id);
     console.log('Usuário deletado com sucesso!')
 

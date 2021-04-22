@@ -52,7 +52,7 @@ exports.deleteProductor = function(id_produtor){
 
 // Deletar festa
 exports.deleteParty = function(id_festa){
-    return database.result('DELETE FROM festa WHERE id_festa = $1', [id_festa]);
+    return database.none('DELETE FROM festa WHERE id_festa = $1', [id_festa]);
 };
 
 // Pegar todas as festa criadas pelo produtor x

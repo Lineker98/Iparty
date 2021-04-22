@@ -142,12 +142,7 @@ router.delete('/deleteParty/:id', async function(req, res) {
 router.put('/:id', async function(req, res) {
     
     const produtor = req.body;
-    const email = produtor.email;
     const id_produtor = req.params.id;
-
-    if(await generalServices.existsEntityByEmail( email ) == true){
-        return res.status(400).send({ error: 'Email já cadastrado!'});
-    }
      
     try {
 
