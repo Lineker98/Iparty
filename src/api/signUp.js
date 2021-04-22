@@ -43,9 +43,10 @@ async function sendUserDataToServer(data) {
       birthday: responseJson.data_nascimento,
       email: responseJson.email,
       id: responseJson.id_usuario ?
-        responseJson.id_usuario : responseJson.newUser.id_produtor,
+        responseJson.id_usuario : responseJson.id_produtor,
       name: responseJson.nome,
       phone: responseJson.telefone,
+      type: String(responseJson.tipo).toLowerCase(),
     }
   }
 }

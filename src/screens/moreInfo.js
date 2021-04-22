@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
 
 import {
@@ -21,9 +21,10 @@ import partyImg from '../assets/party.png'
 import { background, lightGrey, pink } from '../styles/color'
 import defaultStyle from '../styles/defaultStyle'
 
-import streetApi from '../api/streetLatLon'
+import { AuthContext } from '../components/dados/context'
 
 export default function moreInfo({ route, navigation }) {
+  const { getCurrentUser } = useContext(AuthContext);
 
   const [address, setAddress] = useState({
     road: "Reino unido",
@@ -119,14 +120,15 @@ export default function moreInfo({ route, navigation }) {
         {
           !route.params.item.fim || new Date(route.params.item.fim).getTime() >=
             new Date(Date.now()).getTime() ?
-            <LoadingButton
-              styleButton={styles.button}
-              text="Participar"
-              onPress={async () => (
-                alert("participar de festa")
-              )
-              }
-            />
+            getCurrentUser().type == 'produtor' ? null :
+              <LoadingButton
+                styleButton={styles.button}
+                text="Participar"
+                onPress={async () => (
+                  alert("participar de festa")
+                )
+                }
+              />
             : null
         }
 
