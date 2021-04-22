@@ -58,10 +58,8 @@ export default function profile({ route, navigation }) {
       }
 
       callUserServer(id, type)
-      if (type != 'produtor') {
-        callPartyServe(id, type)
-      }
-
+      callPartyServe(id, type)
+      
       return () => {
         navigation.setParams({ user: undefined })
       }
@@ -91,9 +89,9 @@ export default function profile({ route, navigation }) {
       })
   }
 
-  async function callPartyServe(id) {
+  async function callPartyServe(id, type) {
     GetUserPartyApi.
-      callGetUserPartyServe(id)
+      callGetUserPartyServe(id,type)
       .then((snapshot) => {
         if (!snapshot.error) {
           setParties(snapshot)

@@ -84,6 +84,15 @@ export default function createParty({ route, navigation }) {
       alert(party.error)
     }
     else {
+      setName("");
+      setStart(now);
+      setEnd(now);
+      setAddress("");
+      setLat("");
+      setLon("");
+      setListAddress([]);
+      setDescrition("");
+      setPrice("");
       navigation.navigate('map', { lat, lon })
     }
   }
