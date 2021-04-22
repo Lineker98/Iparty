@@ -36,6 +36,6 @@ exports.partiesByDays = function(today, period){
     return userData.partiesByDay(today, period);
 }
 
-// exports.deleteUser = function (id) {
-//     return userData.delete(id);
-// };
+exports.deleteUser = function (id) {
+    return userData.deleteUser(id);
+};

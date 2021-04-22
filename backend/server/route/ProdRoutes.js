@@ -114,4 +114,28 @@ router.get('/listparties/:id', async function (req, res){
     }
 });
 
+router.delete('/:id', async function(req, res) {
+
+    try {
+        await prodServices.deleteProductor(req.params.id);
+        console.log('Produtor deletado com sucesso!')
+        res.end();
+    } catch (error) {
+        console.log('Erro ao realizar exclusão de produtor!')
+        return res.status(400).send({ error: 'Erro ao realizar exclusão de produtor!'});
+    }
+})
+
+router.delete('/deleteParty/:id', async function(req, res) {
+    
+    try {
+        await prodServices.deleteParty(req.params.id);
+        console.log('Festa deletada com sucesso');
+        res.end();
+    } catch (error) {
+        console.log('Erro ao realizar exclusão da festa!')
+        return res.status(400).send({ error: 'Erro ao realizar exclusão da festa!'});
+    }
+})
+
 module.exports = router;

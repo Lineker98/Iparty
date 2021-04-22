@@ -37,6 +37,6 @@ exports.partiesByDay = function(today, period){
     return database.manyOrNone('SELECT * FROM festa WHERE inicio BETWEEN $1 and $2', [today, period])
 }
 
-// exports.deleteUser = function (id) {
-//     return database.none('delete FROM usuario WHERE id_usuario = $1', [id]);
-// }
+exports.deleteUser = function (id) {
+    return database.none('delete FROM usuario WHERE id_usuario = $1', [id]);
+}

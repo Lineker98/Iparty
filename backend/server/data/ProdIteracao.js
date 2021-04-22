@@ -15,7 +15,7 @@ exports.creatProdutor = function(produtor){
 
 exports.creatParty = function(party){
     return database.one('INSERT INTO Festa (preco, inicio, fim, descricao, longitude, latitude, nome_festa)' +
-    'VALUES ($1, $2, $3, $4, $5, $6, $7) returning *',
+    'VALUES ($1, $2, $3, $4, $5, $6, $7) returning id_festa',
     [party.preco, party.inicio, party.fim, party.descricao, party.longitude, party.latitude, party.nome_festa]);
 };
 
@@ -44,8 +44,14 @@ exports.getAllDataJuridica = function(id_produtor){
                                 " WHERE prod.id_produtor = $1 AND  pj.id_produtor = $2", [id_produtor, id_produtor]);
 };
 
+// Deletar produtor
 exports.deleteProductor = function(id_produtor){
-    return database.result('delete FROM produtor WHERE id_produtor = $1', [id_produtor]);
+    return database.result('DELETE FROM produtor WHERE id_produtor = $1', [id_produtor]);
+};
+
+// Deletar festa
+exports.deleteParty = function(id_festa){
+    return database.result('DELETE FROM festa WHERE id_festa = $1', [id_festa]);
 };
 
 // Pegar todas as festa criadas pelo produtor x

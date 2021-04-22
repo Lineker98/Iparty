@@ -115,9 +115,10 @@ router.post('/UserInParty', async function (req, res) {
     };
 });
 
-// router.delete('/:id',  async function (req, res) {
-//     await userService.deleteUser(req.params.id);
-//     res.end();
-// });
+router.delete('/:id',  async function (req, res) {
+    await userService.deleteUser(req.params.id);
+    console.log('Usuário deletado com sucesso!')
+    res.end();
+});
 
 module.exports = router;

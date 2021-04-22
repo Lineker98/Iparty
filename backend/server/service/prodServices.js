@@ -44,4 +44,8 @@ exports.getParties = function(id_produtor){
     return prodData.getParties(id_produtor);
 };
 
+exports.deleteParty = function(id_festa){
+    return prodData.deleteParty(id_festa);
+}
+
 
