@@ -106,15 +106,8 @@ export default function editProfile({ route, navigation }) {
       .callDeleteServe(
         getCurrentUser().id, getCurrentUser().type
       )
-
-    console.log(info)
-
-    if (info.message) {
-      signOut()
-    }
-    else {
-      alert(info.error)
-    }
+    
+    signOut()
   }
 
   async function callUpdate() {
