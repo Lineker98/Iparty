@@ -25,7 +25,8 @@
     "react-native-safe-area-context": "3.1.9",
     "react-native-screens": "~2.15.2",
     "react-native-web": "~0.13.12",
-    "react-native-maps": "0.27.1"
+    "react-native-maps": "0.27.1",
+    "expo-permissions": "~10.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

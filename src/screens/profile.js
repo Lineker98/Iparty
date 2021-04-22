@@ -100,8 +100,6 @@ export default function profile({ route, navigation }) {
           alert(snapshot.error)
         }
       })
-
-
   }
 
   return (
