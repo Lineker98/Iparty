@@ -19,6 +19,7 @@ import Calender from '../components/button/calender';
 
 import userData from '../components/dados/userData'
 import deleteApi from '../api/delete'
+import updateApi from '../api/update'
 import GetUserDataApi from '../api/getUserData'
 import GetUserPartyApi from '../api/getUserParty'
 import { AuthContext } from '../components/dados/context'
@@ -36,7 +37,6 @@ export default function editProfile({ route, navigation }) {
 
   const { getCurrentUser, signOut } = useContext(AuthContext);
 
-  const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -62,7 +62,7 @@ export default function editProfile({ route, navigation }) {
         navigation.setParams({ user: undefined })
       }
 
-    }, [route.params && route.params.user])
+    }, [])
   )
 
   function callUserServer(id, type) {
@@ -74,7 +74,6 @@ export default function editProfile({ route, navigation }) {
           setName(snapshot.name)
           setBirthday(snapshot.birthday ?
             new Date(snapshot.birthday) : null)
-          setId(id)
           setPhone(snapshot.phone)
           setPassword(snapshot.password)
         }
@@ -83,7 +82,6 @@ export default function editProfile({ route, navigation }) {
           setEmail(currentUser.email)
           setName(currentUser.name)
           setBirthday(new Date(currentUser.birthday))
-          setId(currentUser.id)
           setPhone(currentUser.phone)
           setPassword(currentUser.password)
         }
@@ -101,6 +99,47 @@ export default function editProfile({ route, navigation }) {
           alert(snapshot.error)
         }
       })
+  }
+
+  async function callDelete() {
+    let info = await deleteApi
+      .callDeleteServe(
+        getCurrentUser().id, getCurrentUser().type
+      )
+
+    console.log(info)
+
+    if (!info) {
+      signOut()
+    }
+    else {
+      alert(info.error)
+    }
+  }
+
+  async function callUpdate() {
+    let data = {
+      "id_usuario": getCurrentUser().id,
+      "nome": name,
+      "cpf": getCurrentUser().cpf,
+      "email": email,
+      "senha": password,
+      "avaliacao": "5",
+      "data_nascimento": birthday,
+      "telefone": phone,
+    }
+
+    let info = await updateApi
+      .callUpdateServe(
+        getCurrentUser().id, getCurrentUser().type, data
+      )
+
+    if (!info.error) {
+      navigation.navigate('profile')
+    }
+    else {
+      alert(info.error)
+    }
   }
 
   return (
@@ -154,7 +193,7 @@ export default function editProfile({ route, navigation }) {
     "telefone": "+235 (371) 503-0394"
 } */}
             {
-              !birthday ? null :
+              getCurrentUser().type == 'produtor' ? null :
                 <Calender
                   onChange={setBirthday}
                   text='Aniversário'
@@ -166,7 +205,7 @@ export default function editProfile({ route, navigation }) {
             }
 
             {
-              !phone ? null :
+              getCurrentUser().type != 'produtor' ? null :
                 <TextInput
                   style={defaultStyle.input}
                   placeholderTextColor={defaultStyle.input.color}
@@ -202,9 +241,7 @@ export default function editProfile({ route, navigation }) {
 
         <LoadingButton
           text="Atualizar"
-          onPress={async () => (
-            await callLoginServe()
-          )
+          onPress={async () => (await callUpdate())
           }
         />
 
@@ -212,9 +249,7 @@ export default function editProfile({ route, navigation }) {
           styleButton={[defaultStyle.button, { backgroundColor: 'black' }]}
           text="Excluir conta"
           onPress={async () => (
-            await deleteApi.callDeleteServe(
-              getCurrentUser().id, getCurrentUser().type
-            )
+            await callDelete()
           )
           }
         />

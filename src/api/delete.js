@@ -16,7 +16,7 @@ async function callDeleteServe(id, type) {
 async function sendIdToServer(id, type) {
   let link;
 
-  if (type == 'produtor') {
+  if (type != 'produtor') {
     link = global.URL_API + 'user/' + String(id)
   }
   else {
@@ -32,8 +32,6 @@ async function sendIdToServer(id, type) {
   let responseJson = await response.json();
 
   return responseJson
-
-
 }
 
 const responseApi = {

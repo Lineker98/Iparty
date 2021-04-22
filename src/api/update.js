@@ -1,39 +1,38 @@
-async function callUpdateServe(id, type) {
+async function callUpdateServe(id, type, data) {
   let responseJson = {}
 
   try {
-    responseJson = await sendIdToServer(id, type)
+    responseJson = await sendIdToServer(id, type, data)
   }
   catch (error) {
     responseJson = {
-      error: "callDeleteServe: " + error.message
+      error: "callUpdateServe: " + error.message
     }
   }
 
   return responseJson
 }
 
-async function sendIdToServer(id, type) {
+async function sendIdToServer(id, type, data) {
   let link;
 
-  if (type == 'produtor') {
+  if (type != 'produtor') {
     link = global.URL_API + 'updateUser/' + String(id)
   }
   else {
     link = global.URL_API + 'produtor/' + String(id)
   }
   const response = await fetch(link, {
-    method: 'DELETE',
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify(data),
   });
 
   let responseJson = await response.json();
 
   return responseJson
-
-
 }
 
 const responseApi = {

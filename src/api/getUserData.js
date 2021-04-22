@@ -37,6 +37,7 @@ async function sendIdToServer(id, type) {
   else {
     return {
       cpf: responseJson.cpf,
+      password: responseJson.senha,
       birthday: responseJson.data_nascimento,
       email: responseJson.email,
       id: responseJson.id_usuario ? 
