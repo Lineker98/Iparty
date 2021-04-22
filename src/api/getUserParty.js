@@ -16,7 +16,7 @@ async function callGetUserPartyServe(id, type) {
 async function sendUserIdToServer(id, type) {
   let link;
 
-  if (type = 'produtor') {
+  if (type == 'produtor') {
     link = global.URL_API + 'produtor/listparties/' + String(id)
   }
   else {

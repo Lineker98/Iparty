@@ -23,6 +23,8 @@ import defaultStyle from '../styles/defaultStyle'
 
 import { AuthContext } from '../components/dados/context'
 
+import frequentaApi from '../api/frequenta'
+
 export default function moreInfo({ route, navigation }) {
   const { getCurrentUser } = useContext(AuthContext);
 
@@ -33,6 +35,26 @@ export default function moreInfo({ route, navigation }) {
     state: "Minas Gerais",
     country: "br".toUpperCase()
   });
+
+  async function frequenta(id) {
+    let currentUser = getCurrentUser()
+
+    let data = {
+      "id_usuario": currentUser.id,
+      "id_festa": id
+    }
+
+    let snapshot = await frequentaApi
+      .callFrequentaServe(data)
+
+    if (!snapshot.error) {
+      navigation.navigate('map')
+    }
+    else{
+      alert(snapshot.error)
+    }
+
+  }
 
   // useFocusEffect(
   //   useCallback(() => {
@@ -125,7 +147,7 @@ export default function moreInfo({ route, navigation }) {
                 styleButton={styles.button}
                 text="Participar"
                 onPress={async () => (
-                  alert("participar de festa")
+                  await frequenta(route.params.item.id_festa)
                 )
                 }
               />
@@ -136,15 +158,6 @@ export default function moreInfo({ route, navigation }) {
     </ScrollView>
   )
 }
-
-// "descricao": null,
-//       "fim": null,
-//       "id_festa": "1",
-//       "inicio": "2020-05-26T20:30:34.000Z",
-//       "latitude": -64.1582003,
-//       "longitude": -77.1973997,
-//       "nome_festa": "varius integer ac",
-//       "preco": 60.95,
 
 const styles = StyleSheet.create({
   container: {

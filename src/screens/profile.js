@@ -46,11 +46,10 @@ export default function profile({ route, navigation }) {
       navigation.setOptions({
         tabBarVisible: true,
       })
-
+      
       if (route.params && route.params.user) {
         if (route.params.user.id != id) {
           id = route.params.user.id;
-          type = route.params.user.type;
           navigation.setOptions({
             tabBarVisible: false,
           })
