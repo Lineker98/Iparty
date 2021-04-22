@@ -67,14 +67,3 @@ exports.updateProductor = function(id_produtor, produtor){
             [produtor.nome, produtor.email, produtor.senha, produtor.telefone, produtor.avaliacao, id_produtor]);
 };
 
-exports.updatePessoaFisica = function(id_produtor, cpf){
-    return database.result("UPDATE pessoafisica SET cpf = $1 WHERE id_produtor = $2",
-            [cpf, id_produtor]);
-};
-
-exports.updatePessoaJuridica = function(id_produtor, cnpj){
-    return database.result("UPDATE pessoajuridica" +
-            "SET cnpj = $1" +
-            "WHERE id_produtor = $2",
-            [cnpj, id_produtor]);
-};

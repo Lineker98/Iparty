@@ -151,19 +151,10 @@ router.put('/:id', async function(req, res) {
      
     try {
 
-        if(produtor.cpf){
-
-            const newProdutor = await prodServices.updateProductor(id_produtor, produtor);
-            await prodServices.updatePessoaFisica(id_produtor, produtor.cpf);
-            console.log("Atualização do produtor realizada com sucesso!");
-            res.json( newProdutor );
-        }
-        else{
-            const newProdutor = await prodServices.updateProductor(id_produtor, produtor);
-            await prodServices.updatePessoaJuridica(id_produtor, produtor.cnpj);
-            console.log("Atualização do produtor realizada com sucesso!");
-            res.json( newProdutor )
-        }
+        const newProdutor = await prodServices.updateProductor(id_produtor, produtor);
+        console.log("Atualização do produtor realizada com sucesso!");
+        res.json( newProdutor );
+        
     } catch (error) {
         console.log('Erro ao atualizar o produtor')
         return res.status(204).send({ error: "Erro ao atualizar o produtor"})
