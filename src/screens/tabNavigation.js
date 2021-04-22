@@ -9,6 +9,7 @@ import {
   CreatePartyScreen,
   SearchScreen,
   MoreInfoScreen,
+  EditProfileScreen
 } from "./index";
 
 import { background, darkBlue, pink } from "../styles/color";
@@ -33,7 +34,7 @@ export default function tabNavigation() {
 
   return (
     <Tab.Navigator
-      initialRouteName="create"
+      initialRouteName="edit"
       sceneContainerStyle={{ backgroundColor: background }}
       tabBarOptions={{
         style: { backgroundColor: '#121222' },
@@ -106,15 +107,15 @@ export default function tabNavigation() {
         }}
       />
 
-      {/* <Tab.Screen
+      <Tab.Screen
         name="edit"
-        component={EditScreen}
+        component={EditProfileScreen}
         options={{
           tabBarButton: () => null,
           tabBarVisible: false,
           title: () => null,
         }}
-      /> */}
+      />
     </Tab.Navigator>
   );
 }

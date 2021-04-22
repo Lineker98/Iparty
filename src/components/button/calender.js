@@ -11,10 +11,11 @@ export default function calender({
   styleDate, 
   styleText=styles.dateText, 
   styleContainer, 
-  text
+  text,
+  value = now,
 }) {
 
-  const [date, setDate] = useState(now)
+  const [date, setDate] = useState(value)
   const [isCalenderOpen, setIsCalenderOpen] = useState(false)
 
   const onChangeDate = (event, selectedDate) => {

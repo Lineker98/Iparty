@@ -59,7 +59,7 @@ export default function profile({ route, navigation }) {
 
       callUserServer(id, type)
       callPartyServe(id, type)
-      
+
       return () => {
         navigation.setParams({ user: undefined })
       }
@@ -91,7 +91,7 @@ export default function profile({ route, navigation }) {
 
   async function callPartyServe(id, type) {
     GetUserPartyApi.
-      callGetUserPartyServe(id,type)
+      callGetUserPartyServe(id, type)
       .then((snapshot) => {
         if (!snapshot.error) {
           setParties(snapshot)
@@ -117,7 +117,7 @@ export default function profile({ route, navigation }) {
               name="cog"
               size={35}
               color={pink}
-              onPress={() => (alert("Config"))}
+              onPress={() => navigation.navigate('edit')}
             />
             <MaterialCommunityIcons
               name="exit-run"
