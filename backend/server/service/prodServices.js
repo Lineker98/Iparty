@@ -48,4 +48,16 @@ exports.deleteParty = function(id_festa){
     return prodData.deleteParty(id_festa);
 }
 
+exports.updateProductor = function(id_produtor, produtor){
+    return prodData.updateProductor(id_produtor, produtor);
+};
+
+exports.updatePessoaFisica = function(id_produtor, cpf){
+    return prodData.updatePessoaFisica(id_produtor, cpf);
+};
+
+exports.updatePessoaJuridica = function(id_produtor, cnpj){
+    return prodData.updatePessoaJuridica(id_produtor, cnpj);
+}
+
 

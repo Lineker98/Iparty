@@ -1,3 +1,4 @@
+const { ColumnSet } = require('pg-promise');
 const database = require('../infra/database');
 
 exports.getProdutor = function (id) {
@@ -58,4 +59,22 @@ exports.deleteParty = function(id_festa){
 exports.getParties = function(id_produtor){
     return database.manyOrNone("SELECT * FROM festa WHERE id_festa IN " +
     "(SELECT id_festa FROM produz WHERE id_produtor = $1)", [id_produtor]);
+};
+
+// Atualizar o produtor
+exports.updateProductor = function(id_produtor, produtor){
+    return database.one("UPDATE produtor SET nome = $1, email = $2, senha = $3, telefone = $4, avaliacao = $5 WHERE id_produtor = $6 returning *",
+            [produtor.nome, produtor.email, produtor.senha, produtor.telefone, produtor.avaliacao, id_produtor]);
+};
+
+exports.updatePessoaFisica = function(id_produtor, cpf){
+    return database.result("UPDATE pessoafisica SET cpf = $1 WHERE id_produtor = $2",
+            [cpf, id_produtor]);
+};
+
+exports.updatePessoaJuridica = function(id_produtor, cnpj){
+    return database.result("UPDATE pessoajuridica" +
+            "SET cnpj = $1" +
+            "WHERE id_produtor = $2",
+            [cnpj, id_produtor]);
 };

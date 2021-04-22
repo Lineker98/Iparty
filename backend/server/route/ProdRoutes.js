@@ -102,6 +102,7 @@ router.post('/register', async (req, res) => {
 
 });
 
+
 router.get('/listparties/:id', async function (req, res){
 
     try {
@@ -135,6 +136,37 @@ router.delete('/deleteParty/:id', async function(req, res) {
     } catch (error) {
         console.log('Erro ao realizar exclusão da festa!')
         return res.status(400).send({ error: 'Erro ao realizar exclusão da festa!'});
+    }
+})
+
+router.put('/:id', async function(req, res) {
+    
+    const produtor = req.body;
+    const email = produtor.email;
+    const id_produtor = req.params.id;
+
+    if(await generalServices.existsEntityByEmail( email ) == true){
+        return res.status(400).send({ error: 'Email já cadastrado!'});
+    }
+     
+    try {
+
+        if(produtor.cpf){
+
+            const newProdutor = await prodServices.updateProductor(id_produtor, produtor);
+            await prodServices.updatePessoaFisica(id_produtor, produtor.cpf);
+            console.log("Atualização do produtor realizada com sucesso!");
+            res.json( newProdutor );
+        }
+        else{
+            const newProdutor = await prodServices.updateProductor(id_produtor, produtor);
+            await prodServices.updatePessoaJuridica(id_produtor, produtor.cnpj);
+            console.log("Atualização do produtor realizada com sucesso!");
+            res.json( newProdutor )
+        }
+    } catch (error) {
+        console.log('Erro ao atualizar o produtor')
+        return res.status(204).send({ error: "Erro ao atualizar o produtor"})
     }
 })
 

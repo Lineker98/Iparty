@@ -58,15 +58,19 @@ router.get('/listuser/:id', async function (req, res) {
 router.put('/updateUser/:id', async function (req, res) {
 
     const user = req.body;
-    const id_usuario = req.params.id
+    const email = user.email;
+    const id_usuario = req.params.id;
     try {
 
+        if(await generalServices.existsEntityByEmail( email ) == true){
+            return res.status(400).send({ error: 'Email já cadastrado!'});
+        }
         const newUser = await userService.updateUser(id_usuario, user);
         console.log('Usuário atualizado com sucesso!');
         res.json( newUser )
 
     } catch (error) {
-        console.log('Usuáio não encontrado!');
+        console.log('Erro na atualização do usuário!');
         return res.status(204);
     }
 });
