@@ -8,7 +8,7 @@ import { pink } from '../styles/color';
 
 export default function iparty({navigation}) {
   return (
-    <View style={defaultStyle.background}>
+    <View style={[defaultStyle.background, {backgroundColor:'black'}]}>
       <StatusBar backgroundColor="black" />
       <Image
         source={logo}

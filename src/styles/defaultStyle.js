@@ -39,8 +39,9 @@ export default StyleSheet.create({
 
   inputHorizontal: {
     padding: 10,
+    color:'white',
     height: 140,
-    borderColor: "grey",
+    backgroundColor:darkBlue,
     borderWidth: 1,
     borderRadius: 10,
     marginBottom: 20,

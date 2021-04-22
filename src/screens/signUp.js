@@ -22,11 +22,11 @@ import { pink } from '../styles/color'
 const IMGDATA = [
   {
     img: userImg,
-    name: 'Usuário'
+    type: 'usuario'
   },
   {
     img: produtorImg,
-    name: 'Produtor'
+    type: 'produtor'
   },
 ]
 
@@ -54,9 +54,9 @@ export default function singUp({ navigation }) {
           renderItem={({ item }) => (
             <TouchableOpacity
               style={{ flex: 1 }}
-              onPress={() => navigation.navigate('signUp2',{name:item.name})}
+              onPress={() => navigation.navigate('signUp2',{type:item.type})}
             >
-              <Text style={styles.imgText}>{item.name}</Text>
+              <Text style={styles.imgText}>{item.type}</Text>
               <Image
                 source={item.img}
                 resizeMode="contain"
@@ -64,7 +64,7 @@ export default function singUp({ navigation }) {
               />
             </TouchableOpacity>
           )}
-          keyExtractor={item => String(item.name)}
+          keyExtractor={item => String(item.type)}
         />
       </View>
 

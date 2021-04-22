@@ -22,7 +22,6 @@ import userData from '../components/dados/userData'
 import { AuthContext } from '../components/dados/context'
 import { pink } from '../styles/color'
 
-
 const now = new Date(Date.now())
 
 export default function signUp2({ route, navigation }) {
@@ -50,7 +49,8 @@ export default function signUp2({ route, navigation }) {
       email: email,
       senha: password,
       data_nascimento: date,
-      telefone: telefone
+      telefone: telefone,
+      tipo: route.params.type
     }
 
     if(cpf.length == 11){
@@ -115,7 +115,7 @@ export default function signUp2({ route, navigation }) {
           />
 
           {
-            route.params && route.params.name != 'Produtor' ?
+            route.params && route.params.type != 'produtor' ?
               <Calender
                 onChange={onChangeDate}
                 text='Data de aniversário'
