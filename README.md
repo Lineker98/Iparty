@@ -6,6 +6,19 @@
 
 </div>
 
+<div style="display:flex;flex:1;flex-direction:column;justify-content=center">
+<div align="center" style="width:100%">
+    <img width="45%" src = "./assets/App/0.jpeg">
+    <img width="45%" src = "./assets/App/2.jpeg">
+</div>
+
+<div align="center" style="width:100%">
+    <img width="30%" src = "./assets/App/3.jpeg">
+    <img width="30%" src = "./assets/App/1.jpeg">
+    <img width="30%" src = "./assets/App/4.jpeg">
+</div>
+</div>
+
 <div align="left" style="text-align:justify; margin-top:40px" >
 
 <br>
@@ -80,6 +93,8 @@ npm install
 
 node server/server.js
 ```
+
+Em App.js modifique o `global.URL_API` para o IP da sua máquina.
 
 ## 🧡 Autores
 
