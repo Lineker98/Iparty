@@ -7,6 +7,10 @@
 </div>
 
 <div style="display:flex;flex:1;flex-direction:column;justify-content=center">
+<div align="center" style="width:100%" href="https://youtu.be/1V5hAf4x6zM">
+    <img width="100%" src = "https://img.youtube.com/vi/1V5hAf4x6zM/hqdefault.jpg">
+</div>
+  
 <div align="center" style="width:100%">
     <img width="45%" src = "./assets/App/0.jpeg">
     <img width="45%" src = "./assets/App/2.jpeg">
@@ -34,7 +38,7 @@ O aplicativo foi criado utilizando o framework em javascript React Native para o
 
 ## ⚙️ Funcionalidades
 
-Desenvolvido para a matéria de banco de dados, com o Iparty você será capaz de:
+Desenvolvido para a matéria de banco de dados, com o [Iparty](https://expo.io/@jjader/projects/iparty) você será capaz de:
 
   - 💃 Registrar-se e fazer o login em nosso sistema;
 
