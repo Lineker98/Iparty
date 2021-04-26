@@ -7,8 +7,10 @@
 </div>
 
 <div style="display:flex;flex:1;flex-direction:column;justify-content=center">
-<div align="center" style="width:100%" href="https://youtu.be/1V5hAf4x6zM">
-    <img width="100%" src = "https://img.youtube.com/vi/1V5hAf4x6zM/hqdefault.jpg">
+<div align="center" style="width:100%" > 
+  <a href="https://youtu.be/1V5hAf4x6zM">
+      <img width="90%" src="https://img.youtube.com/vi/1V5hAf4x6zM/hqdefault.jpg">
+  </a>
 </div>
   
 <div align="center" style="width:100%">
